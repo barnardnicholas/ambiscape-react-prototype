@@ -1,0 +1,34 @@
+{
+  "urls": [
+    "chaffinch-sprite.ogg",
+    "chaffinch-sprite.m4a",
+    "chaffinch-sprite.mp3",
+    "chaffinch-sprite.ac3"
+  ],
+  "sprite": {
+    "chaffinch": [
+      0,
+      2201.541950113379
+    ],
+    "chaffinch2": [
+      4000,
+      2277.0068027210878
+    ],
+    "chaffinch 3": [
+      8000,
+      1893.8775510204077
+    ],
+    "chaffinch 4": [
+      11000,
+      2555.6462585034014
+    ],
+    "chaffinch 5": [
+      15000,
+      3417.6870748299316
+    ],
+    "chaffinch 6": [
+      20000,
+      2320.5442176870756
+    ]
+  }
+}

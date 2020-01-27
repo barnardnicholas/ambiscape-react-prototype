@@ -1,0 +1,30 @@
+{
+  "urls": [
+    "song-thrush-sprite.ogg",
+    "song-thrush-sprite.m4a",
+    "song-thrush-sprite.mp3",
+    "song-thrush-sprite.ac3"
+  ],
+  "sprite": {
+    "song thrush 1": [
+      0,
+      2187.02947845805
+    ],
+    "song thrush 2": [
+      4000,
+      2175.4195011337865
+    ],
+    "song thrush 3": [
+      8000,
+      1264.0362811791376
+    ],
+    "song thrush 4": [
+      11000,
+      3922.721088435374
+    ],
+    "song thrush 5": [
+      16000,
+      3388.6621315192756
+    ]
+  }
+}
