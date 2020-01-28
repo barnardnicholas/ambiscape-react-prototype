@@ -61,7 +61,7 @@ class ChannelCard extends Component {
     const { value } = event.target;
     const { changeFrequency } = this.props;
     const { id } = this.state;
-    this.setState({ Frequency: value });
+    this.setState({ frequency: value });
     changeFrequency(id, value);
   };
 
