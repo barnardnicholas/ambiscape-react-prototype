@@ -136,7 +136,6 @@ class ChannelList extends Component {
           <ul style={styling}>
             <li key="bglabel">Background Sounds</li>
             {channels.map(sound => {
-              console.log(sound);
               if (sound.type === "background") {
                 return this.renderChannelCard(sound);
               }
