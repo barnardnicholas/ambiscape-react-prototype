@@ -132,24 +132,22 @@ class ChannelList extends Component {
     const { channels, highlightedChannel } = this.state;
     if (channels.length > 0) {
       return (
-        <div>
-          <ul style={styling}>
-            <li key="bglabel">Background Sounds</li>
-            {channels.map(sound => {
-              if (sound.type === "background") {
-                return this.renderChannelCard(sound);
-              }
-            })}
-            <li>+</li>
-            <li key="randomlabel">Random Sounds</li>
-            {channels.map(sound => {
-              if (sound.type === "random") {
-                return this.renderChannelCard(sound);
-              }
-            })}
-            <li>+</li>
-          </ul>
-        </div>
+        <ul style={styling}>
+          <li key="bglabel">Background Sounds</li>
+          {channels.map(sound => {
+            if (sound.type === "background") {
+              return this.renderChannelCard(sound);
+            }
+          })}
+          <li>+</li>
+          <li key="randomlabel">Random Sounds</li>
+          {channels.map(sound => {
+            if (sound.type === "random") {
+              return this.renderChannelCard(sound);
+            }
+          })}
+          <li>+</li>
+        </ul>
       );
     } else {
       return (
