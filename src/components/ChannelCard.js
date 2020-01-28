@@ -4,17 +4,12 @@ import audioData from "./data/sounds-index";
 class ChannelCard extends Component {
   state = {
     id: 2,
-    name: "Blackbird",
-    slug: "blackbird",
-    type: "random",
+    name: "",
+    slug: "",
+    type: "",
     loop: false,
-    urls: [
-      "blackbird-sprite.ogg",
-      "blackbird-sprite.m4a",
-      "blackbird-sprite.mp3",
-      "blackbird-sprite.ac3"
-    ],
-    volume: 0.7,
+    urls: [],
+    volume: 0,
     pan: 0.5,
     frequency: 0.5,
     mute: false
@@ -27,6 +22,7 @@ class ChannelCard extends Component {
       id,
       type,
       loop,
+      urls,
       volume,
       pan,
       frequency
@@ -37,6 +33,7 @@ class ChannelCard extends Component {
       slug,
       type,
       loop,
+      urls,
       volume,
       pan,
       frequency

@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import ChannelCard from "./ChannelCard";
 import * as api from "./utils/api";
+import * as engine from "./utils/audio-engine";
 
 class ChannelList extends Component {
   state = {
     highlightedChannel: "",
     soloChannel: "",
+    channelsDidLoad: false,
     scenarioName: "",
     scenarioSlug: "",
     creatorId: "",
@@ -93,11 +95,19 @@ class ChannelList extends Component {
   }
 
   componentDidUpdate() {
-    const { channels } = this.state;
+    const { channels, channelsDidLoad } = this.state;
     if (channels.length === 0) {
       this.setState({
-        channels: this.loadChannelList()
+        channels: this.loadChannelList(),
+        channelsDidLoad: true
       });
+    }
+    if (channelsDidLoad) {
+      const { channels } = this.state;
+      const bgChannels = channels.filter(channel => {
+        return channel.type === "background";
+      });
+      engine.spawnBgSounds(bgChannels);
     }
   }
 

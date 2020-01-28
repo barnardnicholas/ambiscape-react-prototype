@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Transport from "./Transport";
 import ChannelList from "./ChannelList";
 import * as api from "./utils/api";
+import * as engine from "./utils/audio-engine";
 
 class SingleScenario extends Component {
   state = {
@@ -18,21 +19,33 @@ class SingleScenario extends Component {
   };
 
   startScenario = () => {
+    // need comprehensive channel list, currently in ChannelList
+    // sounds doesn't have enough information
     const { playing } = this.state;
-    const { name } = this.state.scenario;
+    const { name, sounds } = this.state.scenario;
     console.log(`Starting scenario: ${name}`);
     if (!playing) {
       this.setState({ playing: true });
     }
+    const bgSounds = sounds.filter(sound => {
+      return sound.type === "background";
+    });
+    engine.playBgSounds(["italianbirds"]);
   };
 
   stopScenario = () => {
+    // need comprehensive channel list, currently in ChannelList
+    // sounds doesn't have enough information
     const { playing } = this.state;
-    const { name } = this.state.scenario;
+    const { name, sounds } = this.state.scenario;
     console.log(`Stopping scenario: ${name}`);
     if (playing) {
       this.setState({ playing: false });
     }
+    const bgSounds = sounds.filter(sound => {
+      return sound.type === "background";
+    });
+    engine.stopBgSounds(["italianbirds"]);
   };
 
   loadScenario = slug => {
