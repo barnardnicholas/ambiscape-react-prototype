@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ScenarioCard from "./ScenarioCard";
 import { Link } from "@reach/router";
+import * as api from "./utils/api";
 
 class ScenarioList extends Component {
   state = {
@@ -46,6 +47,12 @@ class ScenarioList extends Component {
       }
     ]
   };
+
+  componentDidMount() {
+    const fetchedScenarios = api.getAllScenarios();
+    this.setState({ scenarios: fetchedScenarios });
+  }
+
   render() {
     const { scenarios } = this.state;
     const styling = {
@@ -58,7 +65,7 @@ class ScenarioList extends Component {
         {scenarios.map(scenario => {
           const { slug } = scenario;
           return (
-            <Link to={`/scenarios/${slug}`}>
+            <Link to={`/scenarios/${slug}`} key={slug}>
               <ScenarioCard scenario={scenario} />
             </Link>
           );

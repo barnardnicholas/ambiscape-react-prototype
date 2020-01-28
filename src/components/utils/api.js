@@ -14,3 +14,7 @@ export const getSoundById = id => {
   });
   return filteredSounds[0];
 };
+
+export const getAllScenarios = () => {
+  return scenarios;
+};
