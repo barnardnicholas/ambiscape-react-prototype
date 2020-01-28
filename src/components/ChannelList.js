@@ -5,58 +5,14 @@ import * as api from "./utils/api";
 class ChannelList extends Component {
   state = {
     highlightedChannel: "",
+    soloChannel: "",
     scenarioName: "",
     scenarioSlug: "",
     creatorId: "",
     colorScheme: [],
     isPublic: null,
     likes: null,
-    channels: [
-      {
-        id: 1,
-        name: "Italian Birds",
-        slug: "italianbirds",
-        type: "background",
-        loop: true,
-        volume: 0.7
-      },
-      {
-        id: 2,
-        name: "Blackbird",
-        slug: "blackbird",
-        type: "random",
-        loop: false,
-        volume: 0.7,
-        pan: 0.5
-      },
-      {
-        id: 3,
-        name: "Song Thrush",
-        slug: "songthrush",
-        type: "random",
-        loop: false,
-        volume: 0.7,
-        pan: 0.5
-      },
-      {
-        id: 4,
-        name: "Cuckoo",
-        slug: "cuckoo",
-        type: "random",
-        loop: false,
-        volume: 0.7,
-        pan: 0.5
-      },
-      {
-        id: 5,
-        name: "Chaffinch",
-        slug: "chaffinch",
-        type: "random",
-        loop: false,
-        volume: 0.7,
-        pan: 0.5
-      }
-    ]
+    channels: []
   };
 
   highlightChannel = channelSlug => {
@@ -82,8 +38,15 @@ class ChannelList extends Component {
     });
   };
 
+  toggleSoloChannel = slug => {
+    const { soloChannel } = this.state;
+    this.setState({
+      soloChannel: soloChannel === slug ? "" : slug
+    });
+  };
+
   getChannel = sound => {
-    const { id, volume, pan } = sound;
+    const { id, volume, pan, frequency } = sound;
     const thisSound = api.getSoundById(id);
     const { name, slug, type, urls } = thisSound;
     return {
@@ -93,7 +56,8 @@ class ChannelList extends Component {
       name: name,
       slug: slug,
       type: type,
-      urls: urls
+      urls: urls,
+      frequency: frequency
     };
   };
 
@@ -138,7 +102,7 @@ class ChannelList extends Component {
   }
 
   renderChannelCard(sound) {
-    const { highlightedChannel } = this.state;
+    const { highlightedChannel, soloChannel } = this.state;
     return (
       <ChannelCard
         sound={sound}
@@ -149,6 +113,10 @@ class ChannelList extends Component {
         highlightChannel={this.highlightChannel}
         isHighlighted={highlightedChannel === sound.slug ? true : false}
         toggleHighlight={this.toggleHighlightedChannel}
+        volume={sound.volume}
+        pan={sound.pan}
+        frequency={sound.frequency}
+        soloChannel={soloChannel}
       />
     );
   }
@@ -168,6 +136,7 @@ class ChannelList extends Component {
           <ul style={styling}>
             <li key="bglabel">Background Sounds</li>
             {channels.map(sound => {
+              console.log(sound);
               if (sound.type === "background") {
                 return this.renderChannelCard(sound);
               }

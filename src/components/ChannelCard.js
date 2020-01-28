@@ -33,12 +33,34 @@ class ChannelCard extends Component {
     },
     volume: 0.7,
     pan: 0.5,
-    frequency: 0.5
+    frequency: 0.5,
+    mute: false
   };
 
   componentDidMount() {
-    const { name, slug, id, type, loop, sprite } = this.props.sound;
-    this.setState({ name, id, slug, type, loop, sprite });
+    const {
+      name,
+      slug,
+      id,
+      type,
+      loop,
+      sprite,
+      volume,
+      pan,
+      frequency
+    } = this.props.sound;
+    console.log(frequency);
+    this.setState({
+      name,
+      id,
+      slug,
+      type,
+      loop,
+      sprite,
+      volume,
+      pan,
+      frequency
+    });
   }
 
   handleChangeVolume = event => {
@@ -71,65 +93,22 @@ class ChannelCard extends Component {
     toggleHighlight(slug);
   };
 
+  handleToggleMute = () => {};
+
+  handleToggleSolo = () => {};
+
   render() {
     const { name, id, slug, type, loop, sprite } = this.state;
     const { isHighlighted, highlightChannel } = this.props;
 
     const styling = {
-      // border: "1px solid",
       backgroundColor: "#CDE7BE"
     };
 
-    if (isHighlighted) {
+    const renderChannelVolume = () => {
       return (
-        <li key={id} style={styling}>
-          <label>{name}</label>
-          <button>M</button>
-          <button>S</button>
-          <br />
-          <label>
-            Volume
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-              value={this.state.volume}
-              onChange={this.handleChangeVolume}
-            ></input>
-          </label>
-          <br />
-          <label>
-            Pan
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-              value={this.state.pan}
-              onChange={this.handleChangePan}
-            ></input>
-          </label>
-          <br />
-          <label>
-            Frequency
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-              value={this.state.frequency}
-              onChange={this.handleChangeFrequency}
-            ></input>
-          </label>
-          <br />
-          <button onClick={this.handleToggleHighlight}>^</button>
-        </li>
-      );
-    } else {
-      return (
-        <li key={id} style={styling}>
-          <label>{name}</label>
+        <label>
+          Volume
           <input
             type="range"
             min="0"
@@ -138,6 +117,72 @@ class ChannelCard extends Component {
             value={this.state.volume}
             onChange={this.handleChangeVolume}
           ></input>
+        </label>
+      );
+    };
+
+    const renderChannelButtons = () => {
+      return (
+        <>
+          <button>M</button>
+          <button>S</button>
+        </>
+      );
+    };
+
+    const renderChannelPan = () => {
+      return (
+        <label>
+          Pan
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value={this.state.pan}
+            onChange={this.handleChangePan}
+          ></input>
+        </label>
+      );
+    };
+
+    const renderChannelFrequency = () => {
+      return (
+        <label>
+          Frequency
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value={this.state.frequency}
+            onChange={this.handleChangeFrequency}
+          ></input>
+        </label>
+      );
+    };
+
+    if (isHighlighted) {
+      return (
+        <li key={id} style={styling}>
+          <label>{name}</label>
+          <br />
+          {renderChannelButtons()}
+          <br />
+          {renderChannelVolume()}
+          <br />
+          {type === "random" && renderChannelPan()}
+          <br />
+          {type === "random" && renderChannelFrequency()}
+          <button onClick={this.handleToggleHighlight}>^</button>
+        </li>
+      );
+    } else {
+      return (
+        <li key={id} style={styling}>
+          <label>{name}</label>
+          <br />
+          {renderChannelVolume()}
           <button onClick={this.handleToggleHighlight}>v</button>
         </li>
       );
