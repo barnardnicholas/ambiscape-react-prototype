@@ -114,3 +114,11 @@ ul {
 h1 {
   margin: 0;
 }
+
+.channel {
+  height: 50px;
+}
+
+.channel_highlighted {
+  height: 100px;
+}

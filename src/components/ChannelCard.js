@@ -49,30 +49,99 @@ class ChannelCard extends Component {
     changeVolume(id, value);
   };
 
+  handleChangePan = event => {
+    const { value } = event.target;
+    const { changePan } = this.props;
+    const { id } = this.state;
+    this.setState({ pan: value });
+    changePan(id, value);
+  };
+
+  handleChangeFrequency = event => {
+    const { value } = event.target;
+    const { changeFrequency } = this.props;
+    const { id } = this.state;
+    this.setState({ Frequency: value });
+    changeFrequency(id, value);
+  };
+
+  handleToggleHighlight = () => {
+    const { slug } = this.state;
+    const { toggleHighlight } = this.props;
+    toggleHighlight(slug);
+  };
+
   render() {
     const { name, id, slug, type, loop, sprite } = this.state;
+    const { isHighlighted, highlightChannel } = this.props;
 
     const styling = {
       // border: "1px solid",
-      backgroundColor: "#CDE7BE",
-      height: "30px"
+      backgroundColor: "#CDE7BE"
     };
 
-    return (
-      <li key={id} style={styling}>
-        <label>{name}</label>
-        <button>M</button>
-        <button>S</button>
-        <input
-          type="range"
-          min="0"
-          max="1"
-          step="0.01"
-          value={this.state.volume}
-          onChange={this.handleChangeVolume}
-        ></input>
-      </li>
-    );
+    if (isHighlighted) {
+      return (
+        <li key={id} style={styling}>
+          <label>{name}</label>
+          <button>M</button>
+          <button>S</button>
+          <br />
+          <label>
+            Volume
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={this.state.volume}
+              onChange={this.handleChangeVolume}
+            ></input>
+          </label>
+          <br />
+          <label>
+            Pan
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={this.state.pan}
+              onChange={this.handleChangePan}
+            ></input>
+          </label>
+          <br />
+          <label>
+            Frequency
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={this.state.frequency}
+              onChange={this.handleChangeFrequency}
+            ></input>
+          </label>
+          <br />
+          <button onClick={this.handleToggleHighlight}>^</button>
+        </li>
+      );
+    } else {
+      return (
+        <li key={id} style={styling}>
+          <label>{name}</label>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value={this.state.volume}
+            onChange={this.handleChangeVolume}
+          ></input>
+          <button onClick={this.handleToggleHighlight}>v</button>
+        </li>
+      );
+    }
   }
 }
 

@@ -4,6 +4,7 @@ import * as api from "./utils/api";
 
 class ChannelList extends Component {
   state = {
+    highlightedChannel: "",
     bgSounds: [
       {
         id: 1,
@@ -152,6 +153,10 @@ class ChannelList extends Component {
     }
   };
 
+  highlightChannel = channelSlug => {
+    this.setState({ highlightedChannel: channelSlug });
+  };
+
   getScenario = () => {
     const { scenario } = this.props;
     const fetchedScenario = api.getScenarioBySlug(scenario);
@@ -216,6 +221,13 @@ class ChannelList extends Component {
     } else return null;
   };
 
+  toggleHighlightedChannel = slug => {
+    const { highlightedChannel } = this.state;
+    this.setState({
+      highlightedChannel: highlightedChannel === slug ? "" : slug
+    });
+  };
+
   componentDidMount() {
     this.getScenario();
     this.getSounds();
@@ -229,7 +241,7 @@ class ChannelList extends Component {
       backgroundColor: "#D3E298"
     };
 
-    const { bgSounds, randomSounds } = this.state;
+    const { bgSounds, randomSounds, highlightedChannel } = this.state;
     const { bg_sounds, random_sounds } = this.state.scenario;
     return (
       <div>
@@ -241,6 +253,11 @@ class ChannelList extends Component {
                 sound={bgSound}
                 key={bgSound.id}
                 changeVolume={this.changeVolume}
+                highlightChannel={this.highlightChannel}
+                isHighlighted={
+                  highlightedChannel === bgSound.slug ? true : false
+                }
+                toggleHighlight={this.toggleHighlightedChannel}
               />
             );
           })}
@@ -252,6 +269,11 @@ class ChannelList extends Component {
                 sound={randomSound}
                 key={randomSound.id}
                 changeVolume={this.changeVolume}
+                highlightChannel={this.highlightChannel}
+                isHighlighted={
+                  highlightedChannel === randomSound.slug ? true : false
+                }
+                toggleHighlight={this.toggleHighlightedChannel}
               />
             );
           })}
