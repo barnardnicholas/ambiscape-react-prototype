@@ -10,7 +10,7 @@ class ChannelCard extends Component {
     loop: false,
     urls: [],
     volume: 0,
-    pan: 0.5,
+    pan: 0,
     frequency: 0.5,
     mute: false
   };
@@ -53,7 +53,8 @@ class ChannelCard extends Component {
     const { changePan } = this.props;
     const { id } = this.state;
     this.setState({ pan: value });
-    changePan(id, value);
+    // changePan(id, value);
+    changePan(value);
   };
 
   handleChangeFrequency = event => {
@@ -114,7 +115,7 @@ class ChannelCard extends Component {
           Pan
           <input
             type="range"
-            min="0"
+            min="-1"
             max="1"
             step="0.01"
             value={this.state.pan}

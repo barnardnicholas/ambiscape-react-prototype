@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Transport from "./Transport";
 import ChannelList from "./ChannelList";
-import * as api from "./utils/api";
+import * as utils from "./utils/utils";
 import * as engine from "./utils/audio-engine";
 import scenarios from "./data/scenarios";
 import sounds from "./data/sounds";
@@ -22,28 +22,28 @@ class SingleScenario extends Component {
 
   startScenario = () => {
     const { playing } = this.state;
-    const { name, sounds } = this.state.scenario;
+    const { name, channels } = this.state;
     console.log(`Starting scenario: ${name}`);
     if (!playing) {
       this.setState({ playing: true });
     }
-    const bgSounds = sounds.filter(sound => {
-      return sound.type === "background";
-    });
-    engine.playBgSounds(["italianbirds"]);
+    // const bgSlugs = utils.getSlugsFromChannels(channels, "background");
+    // engine.playBgSounds(bgSlugs);
+    // engine.testPlayHowl("test");
   };
 
   stopScenario = () => {
     const { playing } = this.state;
-    const { name, sounds } = this.state.scenario;
+    const { name, channels } = this.state;
     console.log(`Stopping scenario: ${name}`);
     if (playing) {
       this.setState({ playing: false });
     }
-    const bgSounds = sounds.filter(sound => {
+    const bgSounds = channels.filter(sound => {
       return sound.type === "background";
     });
-    engine.stopBgSounds(["italianbirds"]);
+    // engine.stopBgSounds(bgSounds);
+    // engine.testStopHowl("test");
   };
 
   toggleHighlightedChannel = slug => {
@@ -64,8 +64,9 @@ class SingleScenario extends Component {
     console.log("change volume");
   };
 
-  changePan = () => {
+  changePan = pan => {
     console.log("change pan");
+    // engine.testPanHowl("test", pan);
   };
 
   changeFrequency = () => {
@@ -126,6 +127,11 @@ class SingleScenario extends Component {
       likes: likes,
       channels: newChannels
     });
+    const bgSounds = newChannels.filter(channel => {
+      return channel.type === "background";
+    });
+    // engine.spawnBgSounds(bgSounds);
+    // engine.testCreateHowl("docks");
   }
 }
 

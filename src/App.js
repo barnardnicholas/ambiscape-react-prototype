@@ -7,13 +7,15 @@ import ScenarioList from "./components/ScenarioList";
 
 const App = () => {
   return (
-    <div className="App">
-      <Header />
-      <Router>
-        <SingleScenario path="/scenarios/:scenario_id" />
-        <ScenarioList path="/scenarios" />
-      </Router>
-    </div>
+    <center>
+      <div className="App">
+        <Header />
+        <Router>
+          <SingleScenario path="/scenarios/:scenario_id" />
+          <ScenarioList path="/scenarios" />
+        </Router>
+      </div>
+    </center>
   );
 };
 
