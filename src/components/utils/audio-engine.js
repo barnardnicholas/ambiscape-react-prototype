@@ -33,12 +33,12 @@ export const timingLoop = (slug, sprite, frequency = 0.5) => {
 
 export const spawnBgSounds = bgSoundsArray => {
   bgSoundsArray.forEach(sound => {
-    const { volume, pan } = sound;
+    const { volume, pan, slug } = sound;
     const thisURL = sound.urls[0];
     bgHowls[thisURL] = new Howl({
-      src: [audioData[thisURL]],
+      src: [audioData.background[slug][thisURL]],
       volume: volume,
-      pan: pan,
+      stereo: pan,
       onplay: () => {
         console.log("playing");
       },
@@ -47,4 +47,5 @@ export const spawnBgSounds = bgSoundsArray => {
       }
     });
   });
+  console.log("spawnbgsounds");
 };

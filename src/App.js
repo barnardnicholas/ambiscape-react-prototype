@@ -10,7 +10,7 @@ const App = () => {
     <div className="App">
       <Header />
       <Router>
-        <SingleScenario path="/scenarios/:scenrio_id" />
+        <SingleScenario path="/scenarios/:scenario_id" />
         <ScenarioList path="/scenarios" />
       </Router>
     </div>

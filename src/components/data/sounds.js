@@ -75,6 +75,57 @@ const sounds = [
       "chaffinch 5",
       "chaffinch 6"
     ]
+  },
+  {
+    id: 6,
+    name: "Docks",
+    slug: "docks",
+    type: "background",
+    loop: true,
+    urls: ["docks"]
+  },
+  {
+    id: 7,
+    name: "City Rumbling",
+    slug: "cityrumbling",
+    type: "background",
+    loop: true,
+    urls: ["cityrumbling"]
+  },
+  {
+    id: 8,
+    name: "Seagull",
+    slug: "seagull",
+    type: "random",
+    loop: false,
+    urls: [
+      "seagull1",
+      "seagull2",
+      "seagull3",
+      "seagull4",
+      "seagull5",
+      "seagull6",
+      "seagull7",
+      "seagull8",
+      "seagull9",
+      "seagull10",
+      "seagull11",
+      "seagull12",
+      "seagull13",
+      "seagull14",
+      "gull1",
+      "gull2",
+      "gull3",
+      "seagullsflap"
+    ]
+  },
+  {
+    id: 9,
+    name: "Ship Oars",
+    slug: "shipoars",
+    type: "random",
+    loop: false,
+    urls: ["oarinwater1", "oarinwater2", "oarsinboat"]
   }
 ];
 

@@ -9,6 +9,7 @@ const Transport = ({ startScenario, stopScenario }) => {
   const handleStart = () => {
     startScenario();
   };
+
   const handleStop = () => {
     stopScenario();
   };
