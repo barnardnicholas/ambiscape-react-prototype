@@ -88,3 +88,18 @@ export const randomSoundSpawner = (playerFunction, slug, playing) => {
     }
   }, interval);
 };
+
+export const loop = (cb, iq, slug) => {
+  if (iq.length > 0) {
+    const thisInterval = iq.shift();
+    setTimeout(() => {
+      iq.push(Math.random() * 5000 + 1000);
+      console.log(slug);
+      loop(cb, iq);
+    }, thisInterval);
+  }
+};
+
+export const loopParent = (func, slug, iq) => {
+  func(slug, iq);
+};

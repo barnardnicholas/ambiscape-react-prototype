@@ -33,7 +33,7 @@ class SingleScenario extends Component {
       randomChannels.forEach(channel => {
         const { slug } = channel;
         const playerFunction = this.playNextRandomSound;
-        engine.randomSoundSpawner(playerFunction, slug, playing);
+        // engine.randomSoundSpawner(playerFunction, slug, playing);
       });
     }
   };
