@@ -21,15 +21,13 @@ class SingleScenario extends Component {
   };
 
   startScenario = () => {
-    const { playing } = this.state;
-    const { name, channels } = this.state;
+    const { playing, name, channels } = this.state;
+
     console.log(`Starting scenario: ${name}`);
     if (!playing) {
       this.setState({ playing: true });
+      engine.playBackgroundHowls(channels);
     }
-    // const bgSlugs = utils.getSlugsFromChannels(channels, "background");
-    // engine.playBgSounds(bgSlugs);
-    // engine.testPlayHowl("test");
   };
 
   stopScenario = () => {
@@ -42,8 +40,12 @@ class SingleScenario extends Component {
     const bgSounds = channels.filter(sound => {
       return sound.type === "background";
     });
-    // engine.stopBgSounds(bgSounds);
-    // engine.testStopHowl("test");
+    channels.forEach(channel => {
+      const { slug, type } = channel;
+      if (type === "background") {
+        engine.stopHowl(slug);
+      }
+    });
   };
 
   toggleHighlightedChannel = slug => {
@@ -60,17 +62,19 @@ class SingleScenario extends Component {
     });
   };
 
-  changeVolume = (target_id, value) => {
+  changeVolume = (slug, value) => {
     console.log("change volume");
+    engine.testVolumeHowl(slug, value);
   };
 
-  changePan = pan => {
+  changePan = (slug, pan) => {
     console.log("change pan");
-    // engine.testPanHowl("test", pan);
+    engine.testPanHowl(slug, pan);
   };
 
-  changeFrequency = () => {
+  changeFrequency = (slug, pan) => {
     console.log("change frequency");
+    // engine.testFreqHowl(slug, freq)
   };
 
   render() {
@@ -131,7 +135,8 @@ class SingleScenario extends Component {
       return channel.type === "background";
     });
     // engine.spawnBgSounds(bgSounds);
-    // engine.testCreateHowl("docks");
+    // engine.testCreateHowl("background", "docks");
+    engine.loadAllHowls(newChannels);
   }
 }
 

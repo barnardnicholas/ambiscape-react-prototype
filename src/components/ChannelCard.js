@@ -27,6 +27,7 @@ class ChannelCard extends Component {
       pan,
       frequency
     } = this.props.sound;
+    const { playing } = this.props;
     this.setState({
       name,
       id,
@@ -36,33 +37,34 @@ class ChannelCard extends Component {
       urls,
       volume,
       pan,
-      frequency
+      frequency,
+      playing
     });
   }
 
   handleChangeVolume = event => {
     const { value } = event.target;
     const { changeVolume } = this.props;
-    const { id } = this.state;
+    const { slug } = this.state;
     this.setState({ volume: value });
-    changeVolume(id, value);
+    changeVolume(slug, value);
   };
 
   handleChangePan = event => {
     const { value } = event.target;
     const { changePan } = this.props;
-    const { id } = this.state;
+    const { slug } = this.state;
     this.setState({ pan: value });
     // changePan(id, value);
-    changePan(value);
+    changePan(slug, value);
   };
 
   handleChangeFrequency = event => {
     const { value } = event.target;
     const { changeFrequency } = this.props;
-    const { id } = this.state;
+    const { slug } = this.state;
     this.setState({ frequency: value });
-    changeFrequency(id, value);
+    changeFrequency(slug, value);
   };
 
   handleToggleHighlight = () => {

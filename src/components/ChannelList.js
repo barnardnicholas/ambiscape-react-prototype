@@ -9,7 +9,8 @@ const ChannelList = ({
   changeVolume,
   changeFrequency,
   changePan,
-  channels
+  channels,
+  playing
 }) => {
   const renderChannelCard = sound => {
     return (
@@ -26,6 +27,7 @@ const ChannelList = ({
         pan={sound.pan}
         frequency={sound.frequency}
         soloChannel={soloChannel}
+        playing={playing}
       />
     );
   };

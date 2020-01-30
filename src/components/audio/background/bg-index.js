@@ -3,9 +3,15 @@ import cityrumbling from "./City rumbling 1.ogg";
 import docks from "./Docks.ogg";
 
 const backgroundData = {
-  italianbirds: italianbirds,
-  cityrumbling: cityrumbling,
-  docks: docks
+  italianbirds: {
+    italianbirds: italianbirds
+  },
+  cityrumbling: {
+    cityrumbling: cityrumbling
+  },
+  docks: {
+    docks: docks
+  }
 };
 
 export default backgroundData;

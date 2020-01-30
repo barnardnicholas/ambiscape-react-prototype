@@ -61,13 +61,13 @@ const scenarios = [
         volume: 0.6,
         pan: 0.2,
         frequency: 0.6
-      },
-      {
-        id: 9,
-        volume: 0.5,
-        pan: 0.8,
-        frequency: 0.2
       }
+      // {
+      //   id: 9,
+      //   volume: 0.5,
+      //   pan: 0.8,
+      //   frequency: 0.2
+      // }
     ]
   }
 ];

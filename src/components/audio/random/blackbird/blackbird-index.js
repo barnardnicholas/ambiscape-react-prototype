@@ -14,7 +14,7 @@ import blackbird14 from "./Blackbird14.ogg";
 import blackbird15 from "./Blackbird15.ogg";
 import blackbird16 from "./Blackbird16.ogg";
 
-const blackbird = {
+const blackbirdData = {
   blackbird1: blackbird1,
   blackbird2: blackbird2,
   blackbird3: blackbird3,
@@ -32,4 +32,4 @@ const blackbird = {
   blackbird16: blackbird16
 };
 
-export default blackbird;
+export default blackbirdData;

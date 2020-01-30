@@ -1,77 +1,66 @@
 import { audioData } from "../data/sounds-index";
 const { Howl, Howler } = require("howler");
-const spatial = require("howler/src/plugins/howler.spatial.js");
+// const spatial = require("howler/src/plugins/howler.spatial.js");
 
-const bgHowls = {};
-let testHowls = {};
-let isPlaying = false;
+let allHowls = {};
 
-export const playBgSounds = bgSlugsArray => {
-  bgSlugsArray.forEach(slug => {
-    console.log(`Playing ${slug}...`);
-    const thisHowl = bgHowls[slug];
-    thisHowl.play();
-    console.log(bgHowls[slug]);
+const createHowl = (channel, url) => {
+  const { stereo, loop, html5, type, slug } = channel;
+  const filePath = audioData[type][slug][url];
+  const thisHowl = new Howl({
+    src: [filePath],
+    stereo: stereo,
+    loop: loop,
+    html5: html5
   });
+  allHowls[url] = thisHowl;
 };
 
-export const stopBgSounds = bgSlugsArray => {
-  bgSlugsArray.forEach(slug => {
-    console.log(`Stopping ${slug}...`);
-    bgHowls[slug].stop();
-  });
-};
-
-export const playRandomSound = (slug, sprite) => {
-  console.log(`Playing ${slug} ${sprite}...`);
-};
-
-export const timingLoop = (slug, sprite, frequency = 0.5) => {
-  const interval = Math.random() * frequency * 1000;
-  setTimeout(() => {
-    playRandomSound(slug, sprite);
-    timingLoop(slug, sprite, frequency);
-  }, interval);
-};
-
-export const spawnBgSounds = bgSoundsArray => {
-  bgSoundsArray.forEach(sound => {
-    const { volume, pan, slug } = sound;
-    const thisURL = sound.urls[0];
-    console.log(audioData.background[thisURL]);
-    bgHowls[thisURL] = new Howl({
-      src: [audioData.background[slug][thisURL]],
-      volume: volume,
-      stereo: pan,
-      onplay: () => {
-        console.log("playing");
-      },
-      onstop: () => {
-        console.log("stopped");
-      }
+export const loadAllHowls = channels => {
+  channels.forEach(channel => {
+    const { urls, slug } = channel;
+    urls.forEach(url => {
+      createHowl(channel, url);
     });
   });
 };
 
-export const testCreateHowl = slug => {
-  const thisURL = audioData.background[slug];
-  const thisHowl = new Howl({
-    src: [thisURL],
-    stereo: 0.1,
-    loop: true
-  });
-  testHowls.test = thisHowl;
+export const playHowl = url => {
+  const thisHowl = allHowls[url];
+  if (allHowls[url]) {
+    thisHowl.play();
+  }
 };
 
-export const testPlayHowl = slug => {
-  testHowls[slug].play();
+export const stopHowl = url => {
+  if (allHowls[url]) {
+    allHowls[url].stop();
+  }
 };
 
-export const testStopHowl = slug => {
-  testHowls[slug].stop();
+export const testVolumeHowl = (url, volume) => {
+  if (allHowls[url]) {
+    allHowls[url].volume(volume);
+  }
 };
 
-export const testPanHowl = (slug, pan) => {
+export const testPanHowl = (url, pan) => {
   const thisPan = parseFloat(pan);
-  testHowls.test.stereo(thisPan);
+  if (allHowls[url]) {
+    allHowls[url].stereo(thisPan);
+  }
+};
+
+export const playBackgroundHowls = channels => {
+  if (!allHowls) {
+    console.log("ERROR = No sounds loaded");
+  } else {
+    channels.forEach(channel => {
+      const { type, urls } = channel;
+      const thisURL = urls[0];
+      if (type === "background") {
+        playHowl(thisURL);
+      }
+    });
+  }
 };
