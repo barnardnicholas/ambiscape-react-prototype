@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import audioData from "./data/sounds-index";
+import * as engine from "./utils/audio-engine";
 
 class ChannelCard extends Component {
   state = {
@@ -12,7 +12,10 @@ class ChannelCard extends Component {
     volume: 0,
     pan: 0,
     frequency: 0.5,
-    mute: false
+    mute: false,
+    isPlaying: false,
+    loopCanStart: true,
+    loopIsRunning: false
   };
 
   componentDidMount() {
@@ -37,9 +40,38 @@ class ChannelCard extends Component {
       urls,
       volume,
       pan,
-      frequency,
-      playing
+      frequency
     });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      const { playing } = this.props;
+      const { urls } = this.state;
+      // if (urls.length > 0 && playQueue.length <= 1) {
+      //   const newPlayQueue = urls.sort(() => Math.random() - 0.5);
+      //   this.setState({ playQueue: newPlayQueue });
+    }
+    // if (isPlaying && !loopRunning) {
+    //   this.loop();
+    // }
+    // if (!isPlaying && loopRunning) {
+    //   this.setState({ loopRunning: false });
+    // }
+
+    //   if (type === "random") {
+    //     if (playing && !loopIsRunning) {
+    //       this.setState({ loopIsRunning: true });
+    //       this.loop();
+    //     } else if (!playing) {
+    //       this.setState({
+    //         loopisRunning: false,
+    //         loopCanStart: true,
+    //         isPlaying: false
+    //       });
+    //     }
+    //   }
+    // }
   }
 
   handleChangeVolume = event => {
@@ -55,7 +87,6 @@ class ChannelCard extends Component {
     const { changePan } = this.props;
     const { slug } = this.state;
     this.setState({ pan: value });
-    // changePan(id, value);
     changePan(slug, value);
   };
 
@@ -64,7 +95,6 @@ class ChannelCard extends Component {
     const { changeFrequency } = this.props;
     const { slug } = this.state;
     this.setState({ frequency: value });
-    changeFrequency(slug, value);
   };
 
   handleToggleHighlight = () => {
@@ -105,8 +135,8 @@ class ChannelCard extends Component {
     const renderChannelButtons = () => {
       return (
         <>
-          <button>M</button>
-          <button>S</button>
+          <button onClick={this.handleToggleMute}>M</button>
+          <button onClick={this.handleToggleSolo}>S</button>
         </>
       );
     };
@@ -152,7 +182,7 @@ class ChannelCard extends Component {
           <br />
           {renderChannelVolume()}
           <br />
-          {type === "random" && renderChannelPan()}
+          {renderChannelPan()}
           <br />
           {type === "random" && renderChannelFrequency()}
           <button onClick={this.handleToggleHighlight}>^</button>

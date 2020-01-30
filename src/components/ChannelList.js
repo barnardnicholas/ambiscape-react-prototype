@@ -10,7 +10,8 @@ const ChannelList = ({
   changeFrequency,
   changePan,
   channels,
-  playing
+  playing,
+  playNextRandomSound
 }) => {
   const renderChannelCard = sound => {
     return (
@@ -28,6 +29,7 @@ const ChannelList = ({
         frequency={sound.frequency}
         soloChannel={soloChannel}
         playing={playing}
+        playNextRandomSound={playNextRandomSound}
       />
     );
   };

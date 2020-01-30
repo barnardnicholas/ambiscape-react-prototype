@@ -21,12 +21,20 @@ class SingleScenario extends Component {
   };
 
   startScenario = () => {
+    const { randomSoundSpawner } = this;
     const { playing, name, channels } = this.state;
-
     console.log(`Starting scenario: ${name}`);
     if (!playing) {
       this.setState({ playing: true });
       engine.playBackgroundHowls(channels);
+      const randomChannels = channels.filter(channel => {
+        return channel.type === "random";
+      });
+      randomChannels.forEach(channel => {
+        const { slug } = channel;
+        const playerFunction = this.playNextRandomSound;
+        engine.randomSoundSpawner(playerFunction, slug, playing);
+      });
     }
   };
 
@@ -48,6 +56,30 @@ class SingleScenario extends Component {
     });
   };
 
+  playNextRandomSound = slug => {
+    const { channels } = this.state;
+    const thisChannel = channels.filter(channel => {
+      return channel.slug === slug;
+    })[0];
+    const otherChannels = channels.filter(channel => {
+      return channel.slug !== slug;
+    });
+    const { volume, pan, urls } = thisChannel;
+    const newPlayQueue = [...thisChannel.playQueue];
+    const thisURL = newPlayQueue.shift();
+    engine.playHowl(thisURL, volume, pan);
+    if (newPlayQueue.length > 0) {
+      thisChannel.playQueue = newPlayQueue;
+    } else {
+      const shuffledURLs = urls.sort(() => Math.random() - 0.5);
+      thisChannel.playQueue = shuffledURLs;
+    }
+    const newChannels = [thisChannel, ...otherChannels];
+    this.setState({
+      channels: newChannels
+    });
+  };
+
   toggleHighlightedChannel = slug => {
     const { highlightedChannel } = this.state;
     this.setState({
@@ -64,17 +96,12 @@ class SingleScenario extends Component {
 
   changeVolume = (slug, value) => {
     console.log("change volume");
-    engine.testVolumeHowl(slug, value);
+    engine.changeVolumeOfHowl(slug, value);
   };
 
   changePan = (slug, pan) => {
     console.log("change pan");
-    engine.testPanHowl(slug, pan);
-  };
-
-  changeFrequency = (slug, pan) => {
-    console.log("change frequency");
-    // engine.testFreqHowl(slug, freq)
+    engine.changePanOfHowl(slug, pan);
   };
 
   render() {
@@ -95,6 +122,7 @@ class SingleScenario extends Component {
           changeVolume={this.changeVolume}
           changeFrequency={this.changeFrequency}
           changePan={this.changePan}
+          playNextRandomSound={this.playNextRandomSound}
         />
       </div>
     );
@@ -102,9 +130,9 @@ class SingleScenario extends Component {
 
   componentDidMount() {
     const { scenario_id } = this.props;
-    const filteredScenarios = scenarios.filter(scenario => {
+    const filteredScenario = scenarios.filter(scenario => {
       return scenario.slug === scenario_id;
-    });
+    })[0];
     const {
       name,
       slug,
@@ -112,14 +140,18 @@ class SingleScenario extends Component {
       color_scheme,
       is_public,
       likes
-    } = filteredScenarios[0];
+    } = filteredScenario;
     const newChannels = [];
-    filteredScenarios[0].sounds.forEach(sound => {
+    filteredScenario.sounds.forEach(sound => {
       const { id } = sound;
       const filteredSound = sounds.filter(sound => {
         return sound.id === id;
       })[0];
-      const newChannel = { ...filteredSound, ...sound };
+      const newChannel = {
+        ...filteredSound,
+        ...sound,
+        playQueue: filteredSound.urls
+      };
       newChannels.push(newChannel);
     });
     this.setState({
@@ -131,13 +163,10 @@ class SingleScenario extends Component {
       likes: likes,
       channels: newChannels
     });
-    const bgSounds = newChannels.filter(channel => {
-      return channel.type === "background";
-    });
-    // engine.spawnBgSounds(bgSounds);
-    // engine.testCreateHowl("background", "docks");
     engine.loadAllHowls(newChannels);
   }
+
+  componentDidUpdate() {}
 }
 
 export default SingleScenario;

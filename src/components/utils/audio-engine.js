@@ -25,9 +25,16 @@ export const loadAllHowls = channels => {
   });
 };
 
-export const playHowl = url => {
+export const playHowl = (url, vol, pan) => {
   const thisHowl = allHowls[url];
+  if (vol) {
+    thisHowl.volume(vol);
+  }
+  if (pan) {
+    thisHowl.stereo(pan);
+  }
   if (allHowls[url]) {
+    console.log(`Playing ${url}`);
     thisHowl.play();
   }
 };
@@ -38,13 +45,13 @@ export const stopHowl = url => {
   }
 };
 
-export const testVolumeHowl = (url, volume) => {
+export const changeVolumeOfHowl = (url, volume) => {
   if (allHowls[url]) {
     allHowls[url].volume(volume);
   }
 };
 
-export const testPanHowl = (url, pan) => {
+export const changePanOfHowl = (url, pan) => {
   const thisPan = parseFloat(pan);
   if (allHowls[url]) {
     allHowls[url].stereo(thisPan);
@@ -63,4 +70,21 @@ export const playBackgroundHowls = channels => {
       }
     });
   }
+};
+
+export const clearAllHowls = () => {
+  Howler.volume(0);
+  allHowls = {};
+  Howler.volume(1);
+};
+
+export const randomSoundSpawner = (playerFunction, slug, playing) => {
+  let interval = Math.round(Math.random() * (5000 - 500)) + 500;
+  console.log(`interval: ${interval}ms`);
+  setTimeout(() => {
+    playerFunction(slug);
+    if (playing) {
+      randomSoundSpawner(playerFunction, slug, playing);
+    }
+  }, interval);
 };
