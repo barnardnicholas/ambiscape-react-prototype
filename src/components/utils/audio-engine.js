@@ -3,6 +3,7 @@ const { Howl, Howler } = require("howler");
 // const spatial = require("howler/src/plugins/howler.spatial.js");
 
 let allHowls = {};
+let shouldPlay = false;
 
 const createHowl = (channel, url) => {
   const { stereo, loop, html5, type, slug } = channel;
@@ -72,34 +73,34 @@ export const playBackgroundHowls = channels => {
   }
 };
 
+export const startRandomHowls = () => {
+  shouldPlay = true;
+};
+
+export const stopRandomHowls = () => {
+  shouldPlay = false;
+};
+
 export const clearAllHowls = () => {
   Howler.volume(0);
   allHowls = {};
   Howler.volume(1);
 };
 
-export const randomSoundSpawner = (playerFunction, slug, playing) => {
-  let interval = Math.round(Math.random() * (5000 - 500)) + 500;
-  console.log(`interval: ${interval}ms`);
+export const loop = (slug, playNext) => {
+  const thisInterval = Math.random() * 5000 + 1000;
   setTimeout(() => {
-    playerFunction(slug);
-    if (playing) {
-      randomSoundSpawner(playerFunction, slug, playing);
+    playNext(slug);
+    if (shouldPlay) {
+      loop(slug, playNext);
     }
-  }, interval);
+  }, thisInterval);
 };
 
-export const loop = (cb, iq, slug) => {
-  if (iq.length > 0) {
-    const thisInterval = iq.shift();
-    setTimeout(() => {
-      iq.push(Math.random() * 5000 + 1000);
-      console.log(slug);
-      loop(cb, iq);
-    }, thisInterval);
-  }
+export const muteAll = () => {
+  Howler.volume(0);
 };
 
-export const loopParent = (func, slug, iq) => {
-  func(slug, iq);
+export const unmuteAll = () => {
+  Howler.volume(1);
 };

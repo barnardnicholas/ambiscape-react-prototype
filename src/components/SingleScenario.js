@@ -26,14 +26,17 @@ class SingleScenario extends Component {
     console.log(`Starting scenario: ${name}`);
     if (!playing) {
       this.setState({ playing: true });
+      engine.unmuteAll();
       engine.playBackgroundHowls(channels);
       const randomChannels = channels.filter(channel => {
         return channel.type === "random";
       });
       randomChannels.forEach(channel => {
         const { slug } = channel;
-        const playerFunction = this.playNextRandomSound;
+        const { playQueue } = channel;
         // engine.randomSoundSpawner(playerFunction, slug, playing);
+        engine.startRandomHowls();
+        engine.loop(slug, this.playNextRandomSound, playing);
       });
     }
   };
@@ -45,14 +48,14 @@ class SingleScenario extends Component {
     if (playing) {
       this.setState({ playing: false });
     }
-    const bgSounds = channels.filter(sound => {
-      return sound.type === "background";
-    });
+    engine.muteAll();
+    engine.stopRandomHowls();
+
     channels.forEach(channel => {
       const { slug, type } = channel;
-      if (type === "background") {
-        engine.stopHowl(slug);
-      }
+      // if (type === "background") {
+      engine.stopHowl(slug);
+      // }
     });
   };
 
