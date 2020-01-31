@@ -109,14 +109,10 @@ class ChannelCard extends Component {
   handleToggleSolo = () => {};
 
   render() {
-    const { name, id, slug, type, loop, sprite } = this.state;
-    const { isHighlighted, highlightChannel } = this.props;
+    const { name, id, type } = this.state;
+    const { isHighlighted } = this.props;
 
-    const styling = {
-      backgroundColor: "#CDE7BE",
-      margin: "4px"
-    };
-
+    
     const renderChannelVolume = () => {
       return (
         <label>
@@ -174,9 +170,39 @@ class ChannelCard extends Component {
       );
     };
 
+    const styling = {
+      margin: 0,
+      padding: "6px",
+      position: "relative"
+    };
+
+    const listStyle = {
+      position: "50% 50%",
+      margin: "8px 16px",
+      width: "80%"
+    }
+
+
+    const backgroundStyling = {
+      position: "absolute",
+      width: "76%",
+      height: isHighlighted ? "130px" : "56px",
+      margin: "0px",
+      padding: "0px",
+      borderRadius: "6px",
+      borderWidth: "1px",
+      borderStyle: "solid",
+      borderColor: "#ffffff",
+      backgroundColor: "#000000",
+      opacity: "0.5"
+    };
+
+
     if (isHighlighted) {
       return (
-        <li key={id} style={styling}>
+        <li key={id} style={listStyle}>
+          <div style={backgroundStyling}></div>
+          <div style={styling}>
           <label>{name}</label>
           <br />
           {renderChannelButtons()}
@@ -187,15 +213,20 @@ class ChannelCard extends Component {
           <br />
           {type === "random" && renderChannelFrequency()}
           <button onClick={this.handleToggleHighlight}>^</button>
+          </div>
         </li>
+        
       );
     } else {
       return (
-        <li key={id} style={styling}>
+        <li key={id} style={listStyle}>
+          <div style={backgroundStyling}></div>
+          <div style={styling}>
           <label>{name}</label>
           <br />
           {renderChannelVolume()}
           <button onClick={this.handleToggleHighlight}>v</button>
+          </div>
         </li>
       );
     }

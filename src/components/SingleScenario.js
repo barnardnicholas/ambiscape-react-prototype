@@ -166,11 +166,8 @@ class SingleScenario extends Component {
   render() {
     const { channels, playing, highlightedChannel, soloChannel } = this.state;
     return (
-      <div className="SingleScenario">
-        <Transport
-          startScenario={this.startScenario}
-          stopScenario={this.stopScenario}
-        />
+      <div className="singlescenario">
+        
         <ChannelList
           channels={channels}
           playing={playing}
@@ -182,6 +179,10 @@ class SingleScenario extends Component {
           changeFrequency={this.changeFrequency}
           changePan={this.changePan}
           playNextRandomSound={this.playNextRandomSound}
+        />
+        <Transport
+          startScenario={this.startScenario}
+          stopScenario={this.stopScenario}
         />
       </div>
     );

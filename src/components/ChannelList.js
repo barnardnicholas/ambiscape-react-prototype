@@ -38,13 +38,14 @@ const ChannelList = ({
     // border: "1px solid",
     listStyle: "none",
     padding: "0px",
-    backgroundColor: "#D3E298"
+    // backgroundColor: "#383838"
   };
 
   if (channels.length > 0) {
     return (
+      <center>
       <ul style={styling}>
-        <li key="bglabel">Background Sounds</li>
+        <li key="bglabel" className="channellistlabel">Background Sounds</li>
         {channels.map(sound => {
           if (sound.type === "background") {
             return renderChannelCard(sound);
@@ -59,6 +60,7 @@ const ChannelList = ({
         })}
         <li>+</li>
       </ul>
+      </center>
     );
   } else {
     return (
