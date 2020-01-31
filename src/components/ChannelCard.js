@@ -95,6 +95,7 @@ class ChannelCard extends Component {
     const { changeFrequency } = this.props;
     const { slug } = this.state;
     this.setState({ frequency: value });
+    changeFrequency(slug, value);
   };
 
   handleToggleHighlight = () => {

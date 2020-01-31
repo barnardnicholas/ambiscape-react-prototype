@@ -35,7 +35,9 @@ export const playHowl = (url, vol, pan) => {
     thisHowl.stereo(pan);
   }
   if (allHowls[url]) {
-    console.log(`Playing ${url}`);
+    if (shouldPlay) {
+      console.log(`Playing ${url} - Vol: ${vol}, Pan: ${pan}`);
+    }
     thisHowl.play();
   }
 };
@@ -87,12 +89,16 @@ export const clearAllHowls = () => {
   Howler.volume(1);
 };
 
-export const loop = (slug, playNext) => {
-  const thisInterval = Math.random() * 5000 + 1000;
+export const loop = (slug, frequency, playNext) => {
+  const standardInterval = (1 - frequency) * 16000 + 4000;
+  const intervalVariation = (standardInterval / 5) * Math.random();
+  const thisInterval = standardInterval + intervalVariation;
+
   setTimeout(() => {
     playNext(slug);
     if (shouldPlay) {
-      loop(slug, playNext);
+      console.log(`Interval: ${thisInterval}ms`);
+      loop(slug, frequency, playNext);
     }
   }, thisInterval);
 };
