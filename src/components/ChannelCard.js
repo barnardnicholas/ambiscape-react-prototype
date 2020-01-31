@@ -179,7 +179,8 @@ class ChannelCard extends Component {
     const listStyle = {
       position: "50% 50%",
       margin: "8px 16px",
-      width: "80%"
+      width: "80%",
+      maxWidth: "300px"
     }
 
 
@@ -194,7 +195,8 @@ class ChannelCard extends Component {
       borderStyle: "solid",
       borderColor: "#ffffff",
       backgroundColor: "#000000",
-      opacity: "0.5"
+      opacity: "0.5",
+      maxWidth: "300px"
     };
 
 
@@ -220,7 +222,7 @@ class ChannelCard extends Component {
     } else {
       return (
         <li key={id} style={listStyle}>
-          <div style={backgroundStyling}></div>
+          <center><div style={backgroundStyling}></div></center>
           <div style={styling}>
           <label>{name}</label>
           <br />

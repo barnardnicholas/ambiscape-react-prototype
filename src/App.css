@@ -6,7 +6,7 @@
 .App {
   font-family: "DIN Condensed Bold";
   text-align: center;
-  max-width: 640px;
+  /* max-width: 640px; */
   color: white;
   min-height: 100%;
   background-image: url("./components//assets/background-images/forest-night.jpg");
@@ -139,9 +139,20 @@ headerbg {
 }
 
 .singlescenario {
-  
+  margin: 0px 0px 60px 0px;
 }
 
 .transportbutton {
   z-index: 2;
+}
+
+.transport {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.reactlink {
+  text-decoration: none;
+  color: inherit;
 }

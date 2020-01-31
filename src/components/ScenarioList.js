@@ -27,7 +27,6 @@ class ScenarioList extends Component {
     const { scenarios } = this.state;
     const styling = {
       padding: "0px",
-      backgroundColor: "#D3E298",
       listStyle: "none"
     };
     return (
@@ -35,9 +34,11 @@ class ScenarioList extends Component {
         {scenarios.map(scenario => {
           const { slug } = scenario;
           return (
-            <Link to={`/scenarios/${slug}`} key={slug}>
+            <center>
+            <Link to={`/scenarios/${slug}`} key={slug} className="reactlink">
               <ScenarioCard scenario={scenario} />
             </Link>
+            </center>
           );
         })}
       </ul>
