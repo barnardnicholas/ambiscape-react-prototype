@@ -13,6 +13,7 @@ const App = () => {
         <Router>
           <SingleScenario path="/scenarios/:scenario_id" />
           <ScenarioList path="/scenarios" />
+          <ScenarioList path="/" />
         </Router>
       </div>
     </center>
