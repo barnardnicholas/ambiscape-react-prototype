@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import * as engine from "./utils/audio-engine";
+import * as engine from "../utils/audio-engine";
 
 class ChannelCard extends Component {
   state = {
@@ -112,7 +112,6 @@ class ChannelCard extends Component {
     const { name, id, type } = this.state;
     const { isHighlighted } = this.props;
 
-    
     const renderChannelVolume = () => {
       return (
         <label>
@@ -181,8 +180,7 @@ class ChannelCard extends Component {
       margin: "8px 16px",
       width: "80%",
       maxWidth: "300px"
-    }
-
+    };
 
     const backgroundStyling = {
       position: "absolute",
@@ -199,35 +197,35 @@ class ChannelCard extends Component {
       maxWidth: "300px"
     };
 
-
     if (isHighlighted) {
       return (
         <li key={id} style={listStyle}>
           <div style={backgroundStyling}></div>
           <div style={styling}>
-          <label>{name}</label>
-          <br />
-          {renderChannelButtons()}
-          <br />
-          {renderChannelVolume()}
-          <br />
-          {renderChannelPan()}
-          <br />
-          {type === "random" && renderChannelFrequency()}
-          <button onClick={this.handleToggleHighlight}>^</button>
+            <label>{name}</label>
+            <br />
+            {renderChannelButtons()}
+            <br />
+            {renderChannelVolume()}
+            <br />
+            {renderChannelPan()}
+            <br />
+            {type === "random" && renderChannelFrequency()}
+            <button onClick={this.handleToggleHighlight}>^</button>
           </div>
         </li>
-        
       );
     } else {
       return (
         <li key={id} style={listStyle}>
-          <center><div style={backgroundStyling}></div></center>
+          <center>
+            <div style={backgroundStyling}></div>
+          </center>
           <div style={styling}>
-          <label>{name}</label>
-          <br />
-          {renderChannelVolume()}
-          <button onClick={this.handleToggleHighlight}>v</button>
+            <label>{name}</label>
+            <br />
+            {renderChannelVolume()}
+            <button onClick={this.handleToggleHighlight}>v</button>
           </div>
         </li>
       );

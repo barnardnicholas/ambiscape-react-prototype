@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ScenarioCard from "./ScenarioCard";
 import { Link } from "@reach/router";
-import * as api from "./utils/api";
+import * as api from "../utils/api";
 
 class ScenarioList extends Component {
   state = {
@@ -35,9 +35,9 @@ class ScenarioList extends Component {
           const { slug } = scenario;
           return (
             <center>
-            <Link to={`/scenarios/${slug}`} key={slug} className="reactlink">
-              <ScenarioCard scenario={scenario} />
-            </Link>
+              <Link to={`/scenarios/${slug}`} key={slug} className="reactlink">
+                <ScenarioCard scenario={scenario} />
+              </Link>
             </center>
           );
         })}

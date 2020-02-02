@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Transport from "./Transport";
 import ChannelList from "./ChannelList";
-import * as utils from "./utils/utils";
-import * as engine from "./utils/audio-engine";
-import scenarios from "./data/scenarios";
-import sounds from "./data/sounds";
+import * as utils from "../utils/utils";
+import * as engine from "../utils/audio-engine";
+import scenarios from "../data/scenarios";
+import sounds from "../data/sounds";
 
 class SingleScenario extends Component {
   state = {
@@ -167,7 +167,6 @@ class SingleScenario extends Component {
     const { channels, playing, highlightedChannel, soloChannel } = this.state;
     return (
       <div className="singlescenario">
-        
         <ChannelList
           channels={channels}
           playing={playing}

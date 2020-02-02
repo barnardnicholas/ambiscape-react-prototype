@@ -1,6 +1,6 @@
 @font-face {
   font-family: "DIN Condensed Bold";
-  src: url("./components/fonts/din-condensed-bold.ttf") format("truetype");
+  src: url("./fonts/din-condensed-bold.ttf") format("truetype");
 }
 
 .App {
@@ -9,7 +9,7 @@
   /* max-width: 640px; */
   color: white;
   min-height: 100%;
-  background-image: url("./components//assets/background-images/forest-night.jpg");
+  background-image: url("./assets/background-images/forest-night.jpg");
   background-size: cover;
   background-position: center;
   display: grid;
