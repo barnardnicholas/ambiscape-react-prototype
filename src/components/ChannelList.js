@@ -37,29 +37,31 @@ const ChannelList = ({
   const styling = {
     // border: "1px solid",
     listStyle: "none",
-    padding: "0px",
+    padding: "0px"
     // backgroundColor: "#383838"
   };
 
   if (channels.length > 0) {
     return (
-      <center>
-      <ul style={styling}>
-        <li key="bglabel" className="channellistlabel">Background Sounds</li>
-        {channels.map(sound => {
-          if (sound.type === "background") {
-            return renderChannelCard(sound);
-          }
-        })}
-        <li>+</li>
-        <li key="randomlabel">Random Sounds</li>
-        {channels.map(sound => {
-          if (sound.type === "random") {
-            return renderChannelCard(sound);
-          }
-        })}
-        <li>+</li>
-      </ul>
+      <center className="channellist">
+        <ul style={styling}>
+          <li key="bglabel" className="channellistlabel">
+            Background Sounds
+          </li>
+          {channels.map(sound => {
+            if (sound.type === "background") {
+              return renderChannelCard(sound);
+            }
+          })}
+          <li>+</li>
+          <li key="randomlabel">Random Sounds</li>
+          {channels.map(sound => {
+            if (sound.type === "random") {
+              return renderChannelCard(sound);
+            }
+          })}
+          <li>+</li>
+        </ul>
       </center>
     );
   } else {

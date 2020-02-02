@@ -5,6 +5,7 @@ import * as utils from "../utils/utils";
 import * as engine from "../utils/audio-engine";
 import scenarios from "../data/scenarios";
 import sounds from "../data/sounds";
+import Header from "./Header";
 
 class SingleScenario extends Component {
   state = {
@@ -34,7 +35,6 @@ class SingleScenario extends Component {
       randomChannels.forEach(channel => {
         const { slug } = channel;
         const { playQueue, frequency } = channel;
-        // engine.randomSoundSpawner(playerFunction, slug, playing);
         engine.startRandomHowls();
         engine.loop(slug, frequency, this.playNextRandomSound);
       });
@@ -166,24 +166,27 @@ class SingleScenario extends Component {
   render() {
     const { channels, playing, highlightedChannel, soloChannel } = this.state;
     return (
-      <div className="singlescenario">
-        <ChannelList
-          channels={channels}
-          playing={playing}
-          toggleHighlightedChannel={this.toggleHighlightedChannel}
-          toggleSoloChannel={this.toggleSoloChannel}
-          highlightedChannel={highlightedChannel}
-          soloChannel={soloChannel}
-          changeVolume={this.changeVolume}
-          changeFrequency={this.changeFrequency}
-          changePan={this.changePan}
-          playNextRandomSound={this.playNextRandomSound}
-        />
-        <Transport
-          startScenario={this.startScenario}
-          stopScenario={this.stopScenario}
-        />
-      </div>
+      <>
+        <div className="singlescenario">
+          <Header />
+          <ChannelList
+            channels={channels}
+            playing={playing}
+            toggleHighlightedChannel={this.toggleHighlightedChannel}
+            toggleSoloChannel={this.toggleSoloChannel}
+            highlightedChannel={highlightedChannel}
+            soloChannel={soloChannel}
+            changeVolume={this.changeVolume}
+            changeFrequency={this.changeFrequency}
+            changePan={this.changePan}
+            playNextRandomSound={this.playNextRandomSound}
+          />
+          <Transport
+            startScenario={this.startScenario}
+            stopScenario={this.stopScenario}
+          />
+        </div>
+      </>
     );
   }
 

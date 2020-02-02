@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ScenarioCard from "./ScenarioCard";
+import Header from "./Header";
 import { Link } from "@reach/router";
 import * as api from "../utils/api";
 
@@ -30,18 +31,25 @@ class ScenarioList extends Component {
       listStyle: "none"
     };
     return (
-      <ul style={styling}>
-        {scenarios.map(scenario => {
-          const { slug } = scenario;
-          return (
-            <center>
-              <Link to={`/scenarios/${slug}`} key={slug} className="reactlink">
-                <ScenarioCard scenario={scenario} />
-              </Link>
-            </center>
-          );
-        })}
-      </ul>
+      <>
+        <Header />
+        <ul style={styling}>
+          {scenarios.map(scenario => {
+            const { slug } = scenario;
+            return (
+              <center>
+                <Link
+                  to={`/scenarios/${slug}`}
+                  key={slug}
+                  className="reactlink"
+                >
+                  <ScenarioCard scenario={scenario} />
+                </Link>
+              </center>
+            );
+          })}
+        </ul>
+      </>
     );
   }
 }
