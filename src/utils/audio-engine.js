@@ -66,6 +66,7 @@ export const stopHowl = url => {
 
 export const changeVolumeOfHowl = (url, volume) => {
   if (allHowls[url]) {
+    console.log(allHowls[url]);
     allHowls[url].volume(volume);
   }
 };
