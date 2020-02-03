@@ -40,3 +40,5 @@ const users = [
     saved_scenarios: ""
   }
 ];
+
+export default users;

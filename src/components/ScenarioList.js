@@ -40,7 +40,7 @@ class ScenarioList extends Component {
           {scenarios.map(scenario => {
             const { slug } = scenario;
             return (
-              <center>
+              <center key={slug}>
                 <Link
                   to={`/scenarios/${slug}`}
                   key={slug}

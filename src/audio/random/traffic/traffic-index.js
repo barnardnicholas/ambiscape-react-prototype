@@ -1,6 +1,6 @@
 import ambulancesiren from "./ambulance-siren.mp3";
 import backingup from "./backing-up.mp3";
-import busspass from "./bus-pass.mp3";
+import buspass from "./bus-pass.mp3";
 import caralarm from "./car-alarm.mp3";
 import carhorn1 from "./car-horn-1.mp3";
 import carhorn2 from "./car-horn-2.mp3";
@@ -25,7 +25,7 @@ import siren from "./siren.mp3";
 const trafficData = {
   ambulancesiren: ambulancesiren,
   backingup: backingup,
-  buspass: busspass,
+  buspass: buspass,
   caralarm: caralarm,
   carhorn1: carhorn1,
   carhorn2: carhorn2,
