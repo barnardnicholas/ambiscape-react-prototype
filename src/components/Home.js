@@ -66,6 +66,26 @@ const Home = ({ currentUser }) => {
     } else return null;
   };
 
+  const renderSavedScenarios = () => {
+    const { username } = currentUser;
+    if (username) {
+      return (
+        <Link
+          to={`/users/${username}/scenarios`}
+          key="savedscenarios"
+          className="reactlink"
+        >
+          <li>
+            <div style={backgroundStyling}></div>
+            <div style={styling}>
+              <h3>Saved Scenarios</h3>
+            </div>
+          </li>
+        </Link>
+      );
+    }
+  };
+
   const renderFooter = () => {
     const { username, name } = currentUser;
     if (username) {
@@ -92,6 +112,7 @@ const Home = ({ currentUser }) => {
           </li>
         </Link>
         {renderLoginButton()}
+        {renderSavedScenarios()}
       </ul>
       {renderFooter()}
     </center>

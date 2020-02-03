@@ -1,12 +1,13 @@
 import React from "react";
-import playbutton from "../assets/gui/playbutton3.png";
-import stopbutton from "../assets/gui/stopbutton3.png";
+import * as styles from "../styles";
+import playbutton from "../assets/gui/playbutton4.png";
+import stopbutton from "../assets/gui/stopbutton4.png";
 
 const styling = {
   margin: 0,
   padding: "6px",
-  position: "relative",
-  display: "flex"
+  position: "relative"
+  // display: "flex"
 };
 
 const buttonStyling = {
@@ -46,20 +47,24 @@ const Transport = ({ startScenario, stopScenario }) => {
   return (
     <div className="transport">
       <div style={backgroundStyling}></div>
-      <div style={styling}>
+      <div style={styles.footerStyling}>
         <button
           onClick={handleStart}
           className="transportbutton"
-          style={buttonStyling}
+          style={styles.transportButtonStyling}
         >
-          <img src={playbutton} alt="play" width="42px" height="42px" />
+          <center>
+            <img src={playbutton} alt="play" width="30px" height="30px" />
+          </center>
         </button>
         <button
           onClick={handleStop}
           className="transportbutton"
-          style={buttonStyling}
+          style={styles.transportButtonStyling}
         >
-          <img src={stopbutton} alt="stop" width="42px" height="42px" />
+          <center>
+            <img src={stopbutton} alt="stop" width="30px" height="30px" />
+          </center>
         </button>
       </div>
     </div>

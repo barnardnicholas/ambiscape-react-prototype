@@ -9,11 +9,20 @@ import users from "./data/users";
 import ErrorPage from "./components/ErrorPage";
 
 class App extends Component {
+  // state = {
+  //   currentUser: {
+  //     username: "",
+  //     name: "",
+  //     avatar_url: "",
+  //     saved_scenarios: ""
+  //   }
+  // };
   state = {
     currentUser: {
-      username: "",
-      name: "",
-      avatar_url: "",
+      username: "jessjelly",
+      name: "Jess Jelly",
+      avatar_url:
+        "https://s-media-cache-ak0.pinimg.com/564x/39/62/ec/3962eca164e60cf46f979c1f57d4078b.jpg",
       saved_scenarios: ""
     }
   };
@@ -41,7 +50,11 @@ class App extends Component {
           <Router>
             <Home path="/" currentUser={currentUser} />
             <SingleScenario path="/scenarios/:scenario_id" />
-            <ScenarioList path="/scenarios" />
+            <ScenarioList path="/scenarios" currentUser={currentUser} />
+            <ScenarioList
+              path="/users/:username/scenarios"
+              currentUser={currentUser}
+            />
             <Login path="/login" switchUser={this.switchUser} />
             <ErrorPage path="/error" />
             <ErrorPage default />

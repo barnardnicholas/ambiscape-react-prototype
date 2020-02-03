@@ -6,8 +6,9 @@ const styling = {
   margin: 0,
   padding: "0px 1fr 0px 1fr",
   position: "relative",
-  display: "flex",
-  alignText: "center"
+  // display: "flex",
+  textAlign: "center",
+  alignContent: "center"
 };
 
 const backgroundStyling = {
@@ -25,7 +26,7 @@ const backgroundStyling = {
 
 const Footer = ({ name }) => {
   return (
-    <div className="transport">
+    <div className="transport" style={{ zIndex: 5 }}>
       <div style={backgroundStyling}></div>
       <center>
         <div style={styling}>

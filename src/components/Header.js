@@ -8,7 +8,8 @@ const styling = {
   textAlign: "center",
   position: "fixed",
   top: 0,
-  left: 0
+  left: 0,
+  zIndex: 5
 };
 
 const backgroundStyling = {
