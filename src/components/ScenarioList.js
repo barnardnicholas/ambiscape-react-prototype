@@ -29,12 +29,13 @@ class ScenarioList extends Component {
   render() {
     const { scenarios } = this.state;
     const styling = {
+      margin: "70px 0px",
       padding: "0px",
       listStyle: "none"
     };
     return (
       <>
-        <Header headerText="Ambiscape" />
+        <Header headerText="Scenarios" />
         <ul style={styling}>
           {scenarios.map(scenario => {
             const { slug } = scenario;

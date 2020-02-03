@@ -128,19 +128,16 @@ h1 {
 }
 
 .header {
-  color: white;
-  position: fixed;
-  top: 0;
   /* background-color: #000000; */
   /* border-bottom: 1px white; */
 }
 
-.headerbg {
+/* .headerbg {
   background-color: #000000;
   height: 100%;
   position: fixed;
   top: 0;
-}
+} */
 
 .channellistlabel {
   padding: 8px 0px 0px 0px;

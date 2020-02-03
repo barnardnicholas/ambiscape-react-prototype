@@ -184,7 +184,7 @@ class ChannelCard extends Component {
 
     const backgroundStyling = {
       position: "absolute",
-      width: "76%",
+      width: "80%",
       height: isHighlighted ? "130px" : "56px",
       margin: "0px",
       padding: "0px",

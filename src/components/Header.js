@@ -2,9 +2,13 @@ import React from "react";
 
 const styling = {
   height: "60px",
+  width: "100%",
   display: "flex",
   flexDirection: "space-between",
-  textAlign: "center"
+  textAlign: "center",
+  position: "fixed",
+  top: 0,
+  left: 0
 };
 
 const backgroundStyling = {
@@ -23,6 +27,8 @@ const h1Styling = {
   color: "#ffffff",
   zIndex: 2
 };
+
+const headerStyling = {};
 
 const Header = ({ headerText }) => {
   return (

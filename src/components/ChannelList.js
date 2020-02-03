@@ -36,6 +36,7 @@ const ChannelList = ({
 
   const styling = {
     // border: "1px solid",
+    margin: "70px 0px",
     listStyle: "none",
     padding: "0px"
     // backgroundColor: "#383838"
