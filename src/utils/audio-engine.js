@@ -28,15 +28,15 @@ export const loadAllHowls = channels => {
 
 export const playHowl = (url, vol, pan) => {
   const thisHowl = allHowls[url];
-  if (vol) {
-    thisHowl.volume(vol);
+  if (typeof vol === "number") {
+    thisHowl.volume(vol <= 1 ? vol : 1);
   }
   if (pan) {
     thisHowl.stereo(pan);
   }
   if (allHowls[url]) {
     if (shouldPlay) {
-      console.log(`Playing ${url} - Vol: ${vol}, Pan: ${pan}`);
+      console.log(`Playing ${url}, VOL: ${vol} PAN: ${pan} URL: ${url}`);
     }
     thisHowl.play();
   }
@@ -66,24 +66,28 @@ export const playBackgroundHowls = channels => {
     console.log("ERROR = No sounds loaded");
   } else {
     channels.forEach(channel => {
-      const { type, urls } = channel;
+      const { type, urls, volume, pan } = channel;
       const thisURL = urls[0];
       if (type === "background") {
-        playHowl(thisURL);
+        playHowl(thisURL, volume, pan);
       }
     });
   }
 };
 
 export const startRandomHowls = () => {
+  console.log("startRandomHowls");
   shouldPlay = true;
 };
 
 export const stopRandomHowls = () => {
+  console.log("stopRandomHowls");
   shouldPlay = false;
 };
 
 export const clearAllHowls = () => {
+  console.log("clearAllHowls");
+  shouldPlay = false;
   Howler.volume(0);
   allHowls = {};
   Howler.volume(1);
@@ -95,8 +99,8 @@ export const loop = (slug, frequency, playNext) => {
   const thisInterval = standardInterval + intervalVariation;
 
   setTimeout(() => {
-    playNext(slug);
     if (shouldPlay) {
+      playNext(slug);
       console.log(`Interval: ${thisInterval}ms`);
       loop(slug, frequency, playNext);
     }

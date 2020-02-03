@@ -11,49 +11,49 @@ const scenarios = [
         id: 519,
         slug: "smallstream",
         volume: 0.7,
-        pan: 0
+        pan: 0.5
       },
       {
         id: 521,
         slug: "summerambience",
-        volume: 0.7,
-        pan: 0
+        volume: 0.55,
+        pan: -0.3
       },
       {
         id: 23,
         slug: "woodpecker",
         volume: 0.7,
         pan: 0,
-        frequency: 0.3
+        frequency: 0.2
       },
       {
         id: 22,
         slug: "woodpidgeon",
         volume: 0.7,
-        pan: 0,
+        pan: -0.43,
         frequency: 0.5
       },
       {
         id: 2,
         slug: "blackbird",
-        volume: 0.7,
-        pan: 0,
+        volume: 0.47,
+        pan: 0.4,
         frequency: 0.5
       },
       {
         id: 1,
         slug: "bee",
-        volume: 0.7,
+        volume: 0.45,
         pan: 0,
-        frequency: 0.5
-      },
-      {
-        id: 19,
-        slug: "treefalling",
-        volume: 0.7,
-        pan: 0,
-        frequency: 0.5
+        frequency: 0.2
       }
+      // {
+      //   id: 19,
+      //   slug: "treefalling",
+      //   volume: 0.7,
+      //   pan: 0,
+      //   frequency: 0.5
+      // }
     ]
   },
   {
@@ -67,47 +67,47 @@ const scenarios = [
       {
         id: 513,
         slug: "oceanwaves1",
-        volume: 0.7,
-        pan: 0
+        volume: 0.82,
+        pan: -0.65
       },
       {
         id: 514,
         slug: "oceanwaves2",
-        volume: 0.7,
-        pan: 0
+        volume: 0.9,
+        pan: 0.5
       },
-      {
-        id: 515,
-        slug: "parrots",
-        volume: 0.7,
-        pan: 0
-      },
+      // {
+      //   id: 515,
+      //   slug: "parrots",
+      //   volume: 0.7,
+      //   pan: 0
+      // },
       {
         id: 14,
         slug: "seagull",
-        volume: 0.7,
-        pan: 0,
-        frequency: 0.3
+        volume: 0.85,
+        pan: 0.25,
+        frequency: 0.5
       },
       {
         id: 21,
         slug: "watersplash",
-        volume: 0.7,
+        volume: 0.5,
         pan: 0,
         frequency: 0.5
       },
       {
         id: 13,
         slug: "sailflapping",
-        volume: 0.7,
-        pan: 0,
-        frequency: 0.5
+        volume: 0.8,
+        pan: 0.3,
+        frequency: 0.15
       },
       {
         id: 12,
         slug: "parrot",
-        volume: 0.7,
-        pan: 0,
+        volume: 0.8,
+        pan: 0.4,
         frequency: 0.5
       }
     ]
@@ -132,13 +132,13 @@ const scenarios = [
         volume: 0.7,
         pan: 0
       },
-      {
-        id: 24,
-        slug: "construction",
-        volume: 0.7,
-        pan: 0,
-        frequency: 0.3
-      },
+      // {
+      //   id: 24,
+      //   slug: "construction",
+      //   volume: 0.7,
+      //   pan: 0,
+      //   frequency: 0.3
+      // },
       {
         id: 18,
         slug: "traffic",

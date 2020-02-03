@@ -15,20 +15,22 @@ const backgroundStyling = {
   borderStyle: "solid",
   backgroundColor: "#000000",
   opacity: "0.5"
-}
+};
 
 const h1Styling = {
   textAlign: "center",
   position: "absolute",
   color: "#ffffff",
   zIndex: 2
-}
+};
 
-const Header = () => {
+const Header = ({ headerText }) => {
   return (
     <header style={styling}>
       <div style={backgroundStyling}></div>
-      <center><h1 style={h1Styling}>Ambiscape</h1></center>
+      <center>
+        <h1 style={h1Styling}>{headerText}</h1>
+      </center>
     </header>
   );
 };

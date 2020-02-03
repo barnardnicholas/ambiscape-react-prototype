@@ -3,6 +3,7 @@ import ScenarioCard from "./ScenarioCard";
 import Header from "./Header";
 import { Link } from "@reach/router";
 import * as api from "../utils/api";
+import * as engine from "../utils/audio-engine";
 
 class ScenarioList extends Component {
   state = {
@@ -22,6 +23,7 @@ class ScenarioList extends Component {
   componentDidMount() {
     const fetchedScenarios = api.getAllScenarios();
     this.setState({ scenarios: fetchedScenarios });
+    engine.clearAllHowls();
   }
 
   render() {
@@ -32,7 +34,7 @@ class ScenarioList extends Component {
     };
     return (
       <>
-        <Header />
+        <Header headerText="Ambiscape" />
         <ul style={styling}>
           {scenarios.map(scenario => {
             const { slug } = scenario;

@@ -22,7 +22,7 @@ class SingleScenario extends Component {
   };
 
   startScenario = () => {
-    const { randomSoundSpawner } = this;
+    // const { randomSoundSpawner } = this;
     const { playing, name, channels } = this.state;
     console.log(`Starting scenario: ${name}`);
     if (!playing) {
@@ -77,6 +77,9 @@ class SingleScenario extends Component {
     } else if (newPan > 0.8) {
       newPan = 0.8;
     }
+    // console.log(
+    //   `playNextRandomSound URL - ${thisURL} VOL - ${newVolume} PAN - ${newPan}`
+    // );
     engine.playHowl(thisURL, newVolume, newPan);
     if (newPlayQueue.length > 0) {
       thisChannel.playQueue = newPlayQueue;
@@ -164,11 +167,17 @@ class SingleScenario extends Component {
   };
 
   render() {
-    const { channels, playing, highlightedChannel, soloChannel } = this.state;
+    const {
+      name,
+      channels,
+      playing,
+      highlightedChannel,
+      soloChannel
+    } = this.state;
     return (
       <>
         <div className="singlescenario">
-          <Header />
+          <Header headerText={name} />
           <ChannelList
             channels={channels}
             playing={playing}
@@ -232,6 +241,17 @@ class SingleScenario extends Component {
   }
 
   componentDidUpdate() {}
+
+  componentWillUnmount() {
+    const { channels } = this.state;
+    engine.muteAll();
+    channels.forEach(channel => {
+      const { urls } = channel;
+      urls.forEach(url => {
+        engine.stopHowl(url);
+      });
+    });
+  }
 }
 
 export default SingleScenario;
