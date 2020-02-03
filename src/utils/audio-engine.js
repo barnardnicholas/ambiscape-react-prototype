@@ -8,12 +8,17 @@ let shouldPlay = false;
 const createHowl = (channel, url) => {
   const { stereo, loop, html5, type, slug } = channel;
   const filePath = audioData[type][slug][url];
-  const thisHowl = new Howl({
+  const howlData = {
     src: [filePath],
     stereo: stereo,
     loop: loop,
-    html5: html5
-  });
+    html5: true
+  };
+  // if (type === "background") {
+  //   howlData.html5 = true;
+  // }
+  const thisHowl = new Howl(howlData);
+
   allHowls[url] = thisHowl;
 };
 

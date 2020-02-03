@@ -28,7 +28,6 @@ class ScenarioList extends Component {
 
   renderFooter = () => {
     const { username, name } = this.props.currentUser;
-    console.log(username);
     if (username) {
       return <ScenarioListFooter />;
     } else return null;
