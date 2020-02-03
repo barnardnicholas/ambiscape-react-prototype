@@ -1,7 +1,38 @@
 import React, { Component } from "react";
 import Header from "./Header";
+import users from "../data/users";
 
 export default class Login extends Component {
+  state = {
+    usernameInput: "",
+    passwordInput: ""
+  };
+
+  handleChangeUserName = event => {
+    const { value } = event.target;
+    this.setState({ usernameInput: value });
+  };
+
+  handleChangePassword = event => {
+    const { value } = event.target;
+    this.setState({ passwordInput: value });
+  };
+
+  handleSubmit(event) {
+    event.preventDefault();
+  }
+
+  handleLogIn = event => {
+    console.log("Log In");
+    const { usernameInput, passwordInput } = this.state;
+    const { switchUser } = this.props;
+    switchUser(usernameInput);
+  };
+
+  handleSignUp = event => {
+    console.log("Sign Up");
+  };
+
   render() {
     const pageStyle = {
       display: "flex",
@@ -31,7 +62,9 @@ export default class Login extends Component {
       borderWidth: "1px",
       borderRadius: "6px",
       color: "#ffffff",
-      margin: "4px"
+      margin: "4px",
+      outline: "none",
+      padding: "2px"
     };
 
     const backgroundStyling = {
@@ -49,25 +82,37 @@ export default class Login extends Component {
       maxWidth: "300px"
     };
 
+    const { usernameInput, passwordInput } = this.state;
     return (
       <div style={pageStyle}>
         <Header headerText="Log In" />
         <ul style={listStyle}>
           <div style={backgroundStyling}></div>
-          <div style={styling}>
+          <form style={styling} onSubmit={this.handleSubmit}>
             <h3>Enter credentials</h3>
             <label>
               Username
-              <input type="text" style={textBoxStyle}></input>
+              <input
+                type="text"
+                style={textBoxStyle}
+                onChange={this.handleChangeUserName}
+                value={usernameInput}
+              ></input>
             </label>
             <br />
             <label>
               Password
-              <input type="password" style={textBoxStyle}></input>
+              <input
+                type="password"
+                style={textBoxStyle}
+                onChange={this.handleChangePassword}
+                value={passwordInput}
+              ></input>
             </label>
             <br />
-            <button>Log In</button>
-          </div>
+            <button onClick={this.handleLogIn}>Log In</button>
+            <button onClick={this.handleSignUp}>Sign Up</button>
+          </form>
         </ul>
       </div>
     );

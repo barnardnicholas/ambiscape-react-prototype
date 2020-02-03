@@ -26,19 +26,30 @@ export const loadAllHowls = channels => {
   });
 };
 
-export const playHowl = (url, vol, pan) => {
+export const playHowl = (url, volume, pan) => {
   const thisHowl = allHowls[url];
-  if (typeof vol === "number") {
-    thisHowl.volume(vol <= 1 ? vol : 1);
-  }
-  if (pan) {
-    thisHowl.stereo(pan);
-  }
-  if (allHowls[url]) {
-    if (shouldPlay) {
-      console.log(`Playing ${url}, VOL: ${vol} PAN: ${pan} URL: ${url}`);
+  if (thisHowl) {
+    let newVolume = volume * Math.random();
+    let newPan = Math.random() * 2 - 1 * pan;
+    if (newPan < -0.8) {
+      newPan = -0.8;
+    } else if (newPan > 0.8) {
+      newPan = 0.8;
     }
-    thisHowl.play();
+    if (typeof newVolume === "number") {
+      thisHowl.volume(newVolume <= 1 ? newVolume : 1);
+    }
+    if (typeof newPan === "number") {
+      thisHowl.stereo(newPan);
+    }
+    if (allHowls[url]) {
+      if (shouldPlay) {
+        console.log(
+          `Playing ${url}, VOL: ${newVolume} PAN: ${newPan} URL: ${url}`
+        );
+      }
+      thisHowl.play();
+    }
   }
 };
 

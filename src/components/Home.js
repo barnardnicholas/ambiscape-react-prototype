@@ -1,8 +1,9 @@
 import React from "react";
 import Header from "./Header";
 import { Link } from "@reach/router";
+import Footer from "./Footer";
 
-const Home = () => {
+const Home = ({ currentUser }) => {
   const pageStyle = {
     display: "flex",
     flexDirection: "column"
@@ -26,7 +27,7 @@ const Home = () => {
   };
 
   const titleSyle = {
-    // margin: "180px 0px 16px 0px",
+    margin: "0px 0px 16px 0px",
     fontSize: "80px",
     opacity: "0.7",
     textShadow: "#ffffff 0 0 0.8rem",
@@ -48,10 +49,38 @@ const Home = () => {
     opacity: "0.5",
     maxWidth: "300px"
   };
+
+  const renderLoginButton = () => {
+    const { username, name } = currentUser;
+    if (!username) {
+      return (
+        <Link to="/login" key="login" className="reactlink">
+          <li>
+            <div style={backgroundStyling}></div>
+            <div style={styling}>
+              <h3>Login</h3>
+            </div>
+          </li>
+        </Link>
+      );
+    } else return null;
+  };
+
+  const renderFooter = () => {
+    const { username, name } = currentUser;
+    if (username) {
+      console.log(username);
+      return <Footer name={name} />;
+    }
+  };
+
   return (
     <center style={pageStyle}>
       <header style={titleSyle}>
-        <h2 style={{ fontSize: "80px" }}>Ambiscape</h2>
+        <h2 style={{ fontSize: "80px", margin: "120px 0px 20px 0px" }}>
+          Ambiscape
+        </h2>
+        <h3 style={{ fontSize: "20px" }}>Ambient Soundscape Generator</h3>
       </header>
       <ul style={listStyle}>
         <Link to="/scenarios" key="scenarios" className="reactlink">
@@ -62,23 +91,9 @@ const Home = () => {
             </div>
           </li>
         </Link>
-        <Link to="/login" key="login" className="reactlink">
-          <li>
-            <div style={backgroundStyling}></div>
-            <div style={styling}>
-              <h3>Login</h3>
-            </div>
-          </li>
-        </Link>
-        <Link to="/signup" key="signup" className="reactlink">
-          <li>
-            <div style={backgroundStyling}></div>
-            <div style={styling}>
-              <h3>Sign Up</h3>
-            </div>
-          </li>
-        </Link>
+        {renderLoginButton()}
       </ul>
+      {renderFooter()}
     </center>
   );
 };

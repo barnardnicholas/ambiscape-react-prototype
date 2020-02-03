@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ScenarioCard from "./ScenarioCard";
 import Header from "./Header";
-import { Link } from "@reach/router";
 import * as api from "../utils/api";
 import * as engine from "../utils/audio-engine";
 
@@ -41,13 +40,7 @@ class ScenarioList extends Component {
             const { slug } = scenario;
             return (
               <center key={slug}>
-                <Link
-                  to={`/scenarios/${slug}`}
-                  key={slug}
-                  className="reactlink"
-                >
-                  <ScenarioCard scenario={scenario} />
-                </Link>
+                <ScenarioCard scenario={scenario} />
               </center>
             );
           })}

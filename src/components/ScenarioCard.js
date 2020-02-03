@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "@reach/router";
 
 const ScenarioCard = ({ scenario }) => {
   const styling = {
@@ -33,12 +34,14 @@ const ScenarioCard = ({ scenario }) => {
 
   return (
     <li key={slug} style={listStyle}>
-      <div style={backgroundStyling}></div>
-      <div style={styling}>
-        <h3>{name}</h3>
-        {/* <p>{is_public ? "Public" : "Private"}</p>
+      <Link to={`/scenarios/${slug}`} key={slug} className="reactlink">
+        <div style={backgroundStyling}></div>
+        <div style={styling}>
+          <h3>{name}</h3>
+          {/* <p>{is_public ? "Public" : "Private"}</p>
       <p>{`${likes} likes`}</p> */}
-      </div>
+        </div>
+      </Link>
     </li>
   );
 };

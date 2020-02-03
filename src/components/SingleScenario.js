@@ -70,17 +70,11 @@ class SingleScenario extends Component {
     const { volume, pan, urls } = thisChannel;
     const newPlayQueue = [...thisChannel.playQueue];
     const thisURL = newPlayQueue.shift();
-    let newVolume = volume * Math.random();
-    let newPan = Math.random() * 2 - 1 * pan;
-    if (newPan < -0.8) {
-      newPan = -0.8;
-    } else if (newPan > 0.8) {
-      newPan = 0.8;
-    }
+
     // console.log(
     //   `playNextRandomSound URL - ${thisURL} VOL - ${newVolume} PAN - ${newPan}`
     // );
-    engine.playHowl(thisURL, newVolume, newPan);
+    engine.playHowl(thisURL, volume, pan);
     if (newPlayQueue.length > 0) {
       thisChannel.playQueue = newPlayQueue;
     } else {
@@ -250,6 +244,18 @@ class SingleScenario extends Component {
       urls.forEach(url => {
         engine.stopHowl(url);
       });
+    });
+    this.setState({
+      name: "",
+      slug: "",
+      creator_id: null,
+      color_scheme: [],
+      is_public: null,
+      likes: null,
+      channels: [],
+      playing: false,
+      highlightedChannel: "",
+      soloChannel: ""
     });
   }
 }
