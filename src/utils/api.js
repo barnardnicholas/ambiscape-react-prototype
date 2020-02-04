@@ -1,25 +1,36 @@
 import sounds from "../data/sounds";
 import scenarios from "../data/scenarios";
+import users from "../data/users";
+import * as utils from "../utils/utils";
 
 export const getScenarioBySlug = slug => {
-  const filteredScenarios = scenarios.filter(scenario => {
+  return scenarios.filter(scenario => {
     return scenario.slug === slug;
-  });
-  return filteredScenarios[0];
+  })[0];
+};
+
+export const getScenarioById = id => {
+  return scenarios.filter(scenario => {
+    return scenario.id === id;
+  })[0];
 };
 
 export const getSoundById = id => {
-  const filteredSounds = sounds.filter(sound => {
+  return sounds.filter(sound => {
     return sound.id === id;
-  });
-  return filteredSounds[0];
+  })[0];
 };
 
 export const getSoundBySlug = slug => {
-  const filteredSounds = sounds.filter(sound => {
+  return sounds.filter(sound => {
     return sound.slug === slug;
+  })[0];
+};
+
+export const getSoundsByType = type => {
+  return sounds.filter(sound => {
+    return sound.type === type;
   });
-  return filteredSounds[0];
 };
 
 export const getAllScenarios = () => {
@@ -36,4 +47,14 @@ export const getScenariosByUserId = id => {
   return scenarios.filter(scenario => {
     return scenario.creator_id === id;
   });
+};
+
+export const getUserByUID = uid => {
+  return users.filter(user => {
+    return user.fb_uid === uid;
+  })[0];
+};
+
+export const postScenario = scenario => {
+  scenarios.push(scenario);
 };

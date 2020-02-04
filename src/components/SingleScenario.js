@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Transport from "./Transport";
 import ChannelList from "./ChannelList";
 import * as utils from "../utils/utils";
+import * as api from "../utils/api";
 import * as engine from "../utils/audio-engine";
 import scenarios from "../data/scenarios";
 import sounds from "../data/sounds";
@@ -232,6 +233,32 @@ class SingleScenario extends Component {
     });
   };
 
+  saveScenario = user_id => {
+    const { name, slug, is_public, channels } = this.state;
+    const newSounds = channels.map(channel => {
+      const { id, slug, volume, pan, frequency } = channel;
+      const thisSound = {
+        id: id,
+        slug: slug,
+        volume: volume,
+        pan: pan
+      };
+      if (frequency) {
+        thisSound.frequency = frequency;
+      }
+      return thisSound;
+    });
+    const newScenario = {
+      name: name,
+      slug: slug,
+      is_public: is_public,
+      creator_id: user_id,
+      sounds: newSounds
+    };
+    api.postScenario(newScenario);
+    console.log(scenarios);
+  };
+
   render() {
     const {
       name,
@@ -260,6 +287,7 @@ class SingleScenario extends Component {
           <Transport
             startScenario={this.startScenario}
             stopScenario={this.stopScenario}
+            saveScenario={this.saveScenario}
           />
         </div>
       </>

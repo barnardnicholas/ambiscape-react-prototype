@@ -35,13 +35,17 @@ const backgroundStyling = {
   padding: "0px"
 };
 
-const Transport = ({ startScenario, stopScenario }) => {
+const Transport = ({ startScenario, stopScenario, saveScenario }) => {
   const handleStart = () => {
     startScenario();
   };
 
   const handleStop = () => {
     stopScenario();
+  };
+
+  const handleSave = () => {
+    saveScenario();
   };
 
   return (
@@ -64,6 +68,15 @@ const Transport = ({ startScenario, stopScenario }) => {
         >
           <center>
             <img src={stopbutton} alt="stop" width="30px" height="30px" />
+          </center>
+        </button>
+        <button
+          onClick={handleSave}
+          className="transportbutton"
+          style={styles.transportButtonStyling}
+        >
+          <center>
+            <img src={stopbutton} alt="save" width="30px" height="30px" />
           </center>
         </button>
       </div>
