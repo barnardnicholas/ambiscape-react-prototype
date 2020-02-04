@@ -1,18 +1,19 @@
 import * as firebase from "firebase/app";
 import "firebase/auth/";
-import firebaseConfig from "../auth_ignore/firebase-config";
+import firebaseLocalConfig from "../auth_ignore/firebase-config";
 
-// const config = {
-//   apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
-//   authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
-//   databaseURL: process.env.REACT_APP_FIREBASE_DATABASEURL,
-//   projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
-//   storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
-//   messagingSenderId: process.env.REACT_APP_CLIENTID,
-//   appId: "1:647279773862:web:23437a4f11e27a89b90c67"
-// };
+const envConfig = {
+  apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASEURL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_CLIENTID,
+  appId: process.env.REACT_APP_APPID
+};
 
-console.dir(process.env);
+const firebaseConfig =
+  process.env.NODE_ENV === "production" ? envConfig : firebaseLocalConfig;
 
 firebase.initializeApp(firebaseConfig);
 
