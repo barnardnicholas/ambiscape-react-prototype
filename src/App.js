@@ -9,34 +9,51 @@ import users from "./data/users";
 import ErrorPage from "./components/ErrorPage";
 
 class App extends Component {
-  // state = {
-  //   currentUser: {
-  //     username: "",
-  //     name: "",
-  //     avatar_url: "",
-  //     saved_scenarios: ""
-  //   }
-  // };
   state = {
     currentUser: {
-      username: "jessjelly",
-      name: "Jess Jelly",
-      avatar_url:
-        "https://s-media-cache-ak0.pinimg.com/564x/39/62/ec/3962eca164e60cf46f979c1f57d4078b.jpg",
+      username: "",
+      user_id: 0,
+      name: "",
+      avatar_url: "",
       saved_scenarios: ""
     }
   };
+  // state = {
+  //   testUsers: true,
+  //   currentUser: {
+  //     username: "jessjelly",
+  //     name: "Jess Jelly",
+  //     avatar_url:
+  //       "https://s-media-cache-ak0.pinimg.com/564x/39/62/ec/3962eca164e60cf46f979c1f57d4078b.jpg",
+  //     saved_scenarios: ""
+  //   }
+  // };
 
   switchUser = username => {
-    const { currentUser } = this.state;
-    const filteredUser = users.filter(user => {
-      return user.username === username;
-    })[0];
-    if (filteredUser) {
-      this.setState({ currentUser: filteredUser });
-      navigate("/");
+    const { currentUser, testUsers } = this.state;
+    if (testUsers) {
+      const filteredUser = users.filter(user => {
+        return user.username === username;
+      })[0];
+      if (filteredUser) {
+        this.setState({ currentUser: filteredUser });
+        navigate("/");
+      } else {
+        navigate("/error");
+      }
     } else {
-      navigate("/error");
+      // this will be replaced with REST backend
+      this.setState({
+        currentUser: {
+          username: "jessjelly",
+          user_id: 1,
+          name: "Jess Jelly",
+          avatar_url:
+            "https://s-media-cache-ak0.pinimg.com/564x/39/62/ec/3962eca164e60cf46f979c1f57d4078b.jpg",
+          saved_scenarios: ""
+        }
+      });
+      navigate("/");
     }
   };
 

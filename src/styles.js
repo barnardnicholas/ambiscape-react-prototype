@@ -1,3 +1,16 @@
+export const pageStyle = {
+  display: "flex",
+  flexDirection: "column"
+};
+
+export const titleSyle = {
+  fontSize: "80px",
+  opacity: "0.7",
+  textShadow: "#ffffff 0 0 0.8rem",
+  alignContent: "flex-center",
+  justifyContent: "flex-center"
+};
+
 export const tileULStyling = {
   margin: "70px 0px",
   listStyle: "none",

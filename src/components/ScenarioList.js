@@ -12,13 +12,23 @@ class ScenarioList extends Component {
   };
 
   componentDidMount() {
-    this.loadPresetScenarios();
+    const { path } = this.props;
+    const { username, user_id } = this.props.currentUser;
+    if (path === "/scenarios") {
+      this.loadPresetScenarios();
+    } else {
+      if (typeof user_id === "number" && user_id > 0) {
+        this.loadSavedScenarios(user_id);
+      } else {
+        this.loadPresetScenarios();
+      }
+    }
     engine.clearAllHowls();
   }
 
   loadPresetScenarios = () => {
     console.log("Loading preset scenarios");
-    const presetScenarios = api.getAllScenarios();
+    const presetScenarios = api.getPresetScenarios();
     this.setState({
       scenarios: presetScenarios,
       headerText: "Preset Scenarios"

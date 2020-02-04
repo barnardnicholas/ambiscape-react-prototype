@@ -19,6 +19,12 @@ export const getAllScenarios = () => {
   return scenarios;
 };
 
+export const getPresetScenarios = () => {
+  return scenarios.filter(scenario => {
+    return scenario.creator_id === 0;
+  });
+};
+
 export const getScenariosByUserId = id => {
   return scenarios.filter(scenario => {
     return scenario.creator_id === id;
