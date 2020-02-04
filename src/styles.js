@@ -96,7 +96,8 @@ export const selectStyling = {
   color: "#ffffff",
   fontFamily: "DIN Condensed Bold",
   fontSize: "16px",
-  margin: "0px 0px 0px 8px"
+  margin: "0px 0px 0px 8px",
+  outline: "none"
 };
 
 export const blockerStyling = {
@@ -107,4 +108,18 @@ export const blockerStyling = {
   height: "100%",
   backgroundColor: "#000000",
   opacity: 0.5
+};
+
+export const channelButtonStyling = {
+  borderStyle: "none",
+  width: "20px",
+  height: "20px",
+  backgroundColor: "transparent",
+  color: "#ffffff",
+  padding: 0,
+  outline: "none"
+};
+
+export const channelLabelStyling = {
+  margin: "0px 8px"
 };

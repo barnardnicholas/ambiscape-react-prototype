@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import * as engine from "../utils/audio-engine";
 import * as styles from "../styles";
+import expand from "../assets/gui/expand.png";
+import collapse from "../assets/gui/collapse.png";
+import solo from "../assets/gui/solo.png";
+import mute from "../assets/gui/mute.png";
 
 class ChannelCard extends Component {
   state = {
@@ -107,7 +111,11 @@ class ChannelCard extends Component {
 
   handleToggleMute = () => {};
 
-  handleToggleSolo = () => {};
+  handleToggleSolo = () => {
+    const { slug } = this.state;
+    const { toggleSoloChannel } = this.props;
+    toggleSoloChannel(slug);
+  };
 
   render() {
     const { name, id, type } = this.state;
@@ -115,8 +123,10 @@ class ChannelCard extends Component {
 
     const renderChannelVolume = () => {
       return (
-        <label>
-          {isHighlighted && "Volume"}
+        <>
+          <label style={styles.channelLabelStyling}>
+            {isHighlighted && "Volume"}
+          </label>
           <input
             type="range"
             min="0"
@@ -125,23 +135,39 @@ class ChannelCard extends Component {
             value={this.state.volume}
             onChange={this.handleChangeVolume}
           ></input>
-        </label>
+        </>
       );
     };
 
     const renderChannelButtons = () => {
       return (
         <>
-          <button onClick={this.handleToggleMute}>M</button>
-          <button onClick={this.handleToggleSolo}>S</button>
+          <button
+            onClick={this.handleToggleMute}
+            style={{
+              ...styles.channelButtonStyling,
+              margin: "0px 8px"
+            }}
+          >
+            <img src={mute} alt="Mute" height="16px" width="16px" />
+          </button>
+          <button
+            onClick={this.handleToggleSolo}
+            style={{
+              ...styles.channelButtonStyling,
+              margin: "0px 8px"
+            }}
+          >
+            <img src={solo} alt="Solo" height="16px" width="16px" />
+          </button>
         </>
       );
     };
 
     const renderChannelPan = () => {
       return (
-        <label>
-          Pan
+        <>
+          <label style={styles.channelLabelStyling}>Pan</label>
           <input
             type="range"
             min="-1"
@@ -150,14 +176,14 @@ class ChannelCard extends Component {
             value={this.state.pan}
             onChange={this.handleChangePan}
           ></input>
-        </label>
+        </>
       );
     };
 
     const renderChannelFrequency = () => {
       return (
-        <label>
-          Frequency
+        <>
+          <label style={styles.channelLabelStyling}>Frequency</label>
           <input
             type="range"
             min="0"
@@ -166,7 +192,7 @@ class ChannelCard extends Component {
             value={this.state.frequency}
             onChange={this.handleChangeFrequency}
           ></input>
-        </label>
+        </>
       );
     };
 
@@ -183,7 +209,7 @@ class ChannelCard extends Component {
             style={{ ...styles.tileBackgroundStyling, ...tileSizeStyling }}
           ></div>
           <div style={styles.tileContentStyling}>
-            <label>{name}</label>
+            <label style={styles.channelLabelStyling}>{name}</label>
             <br />
             {renderChannelButtons()}
             <br />
@@ -192,7 +218,22 @@ class ChannelCard extends Component {
             {renderChannelPan()}
             <br />
             {type === "random" && renderChannelFrequency()}
-            <button onClick={this.handleToggleHighlight}>^</button>
+            <button
+              onClick={this.handleToggleHighlight}
+              style={{
+                ...styles.transportButtonStyling,
+                borderStyle: "none",
+                width: "20px",
+                height: "20px"
+              }}
+            >
+              <img
+                src={collapse}
+                alt="Collapse channel"
+                height="16px"
+                width="16px"
+              />
+            </button>
           </div>
         </li>
       );
@@ -205,10 +246,25 @@ class ChannelCard extends Component {
             ></div>
           </center>
           <div style={styles.tileContentStyling}>
-            <label>{name}</label>
+            <label style={styles.channelLabelStyling}>{name}</label>
             <br />
             {renderChannelVolume()}
-            <button onClick={this.handleToggleHighlight}>v</button>
+            <button
+              onClick={this.handleToggleHighlight}
+              style={{
+                ...styles.transportButtonStyling,
+                borderStyle: "none",
+                width: "20px",
+                height: "20px"
+              }}
+            >
+              <img
+                src={expand}
+                alt="Expand channel"
+                height="16px"
+                width="16px"
+              />
+            </button>
           </div>
         </li>
       );

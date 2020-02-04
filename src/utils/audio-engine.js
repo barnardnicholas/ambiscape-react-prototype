@@ -12,7 +12,7 @@ const createHowl = (channel, url) => {
     src: [filePath],
     stereo: stereo,
     loop: loop,
-    html5: true
+    html5: false
   };
   // if (type === "background") {
   //   howlData.html5 = true;
@@ -22,12 +22,12 @@ const createHowl = (channel, url) => {
   allHowls[url] = thisHowl;
 };
 
-export const loadHowlsForOneChannel = (channel) => {
+export const loadHowlsForOneChannel = channel => {
   const { urls } = channel;
-    urls.forEach(url => {
-      createHowl(channel, url);
-    });
-}
+  urls.forEach(url => {
+    createHowl(channel, url);
+  });
+};
 
 export const loadAllHowls = channels => {
   channels.forEach(channel => {

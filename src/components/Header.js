@@ -49,10 +49,10 @@ const Header = ({ headerText }) => {
           ...styles.transportButtonStyling,
           zIndex: 2,
           borderStyle: "none",
-          padding: "4px"
+          padding: "10px"
         }}
       >
-        <img src={backarrow} height="40px" width="40px" />
+        <img src={backarrow} alt="back" height="32px" width="32px" />
       </button>
     </header>
   );
