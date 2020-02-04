@@ -8,3 +8,13 @@ export const getSlugsFromChannels = (channelsArray, type) => {
     return channel.slug;
   });
 };
+
+export const makeChannelFromSlug = (scenarioSlug, soundSlug) => {
+  const thisSound = api.getSoundBySlug(soundSlug)
+  const {sounds} = api.getScenarioBySlug(scenarioSlug)
+  const thisChannel = sounds.filter(sound => {
+    return sound.slug === soundSlug
+  })[0]
+  const result = {...thisSound, ...thisChannel.volume, ...thisChannel.pan, ...thisChannel.frequency}
+  return result
+}

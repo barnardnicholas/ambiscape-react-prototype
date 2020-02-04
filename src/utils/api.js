@@ -15,6 +15,13 @@ export const getSoundById = id => {
   return filteredSounds[0];
 };
 
+export const getSoundBySlug = slug => {
+  const filteredSounds = sounds.filter(sound => {
+    return sound.slug === slug;
+  });
+  return filteredSounds[0];
+};
+
 export const getAllScenarios = () => {
   return scenarios;
 };
