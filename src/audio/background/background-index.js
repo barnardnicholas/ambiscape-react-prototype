@@ -1,5 +1,5 @@
-import campfire from "./campfire.mp3";
-import chimes from "./chimes.mp3";
+import campfire from "./campfire.ogg";
+import chimes from "./chimes.ogg";
 import cityrumbling from "./city-rumbling.ogg";
 import citytraffic from "./city-traffic.ogg";
 import crickets from "./crickets.ogg";
@@ -9,13 +9,13 @@ import italianbirds from "./italian-birds.ogg";
 import jungle from "./jungle.ogg";
 import largewaterfall from "./large-waterfall.ogg";
 import morningbirds from "./morning-birds.ogg";
-import oceanwaves1 from "./ocean-waves-1.mp3";
-import oceanwaves2 from "./ocean-waves-2.mp3";
+import oceanwaves1 from "./ocean-waves-1.ogg";
+import oceanwaves2 from "./ocean-waves-2.ogg";
 import parrots from "./parrots.ogg";
-import rain1 from "./rain-1.mp3";
-import rain2 from "./rain-2.mp3";
-import rumblingfire from "./rumbling-fire.mp3";
-import smallstream from "./small-stream.mp3";
+import rain1 from "./rain-1.ogg";
+import rain2 from "./rain-2.ogg";
+import rumblingfire from "./rumbling-fire.ogg";
+import smallstream from "./small-stream.ogg";
 import snowstorm from "./snowstorm.ogg";
 import summerambience from "./summer-ambience.ogg";
 
