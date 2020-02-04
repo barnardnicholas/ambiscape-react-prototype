@@ -10,6 +10,7 @@ import ErrorPage from "./components/ErrorPage";
 
 class App extends Component {
   state = {
+    testUsers: true,
     currentUser: {
       username: "",
       user_id: 0,
