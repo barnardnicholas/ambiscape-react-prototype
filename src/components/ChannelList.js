@@ -14,7 +14,8 @@ const ChannelList = ({
   channels,
   playing,
   playNextRandomSound,
-  addChannel
+  addChannel,
+  deleteChannel
 }) => {
   const renderChannelCard = sound => {
     return (
@@ -33,6 +34,7 @@ const ChannelList = ({
         soloChannel={soloChannel}
         playing={playing}
         playNextRandomSound={playNextRandomSound}
+        deleteChannel={deleteChannel}
       />
     );
   };

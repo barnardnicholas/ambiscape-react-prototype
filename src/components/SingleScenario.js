@@ -77,8 +77,8 @@ class SingleScenario extends Component {
       randomChannels.forEach(channel => {
         const { slug } = channel;
         const { frequency } = channel;
-        engine.startRandomHowls();
-        engine.loop(slug, frequency, this.playNextRandomSound);
+        // engine.startRandomHowls();
+        engine.startOneRandomChannel(slug, frequency, this.playNextRandomSound);
       });
     }
   };
@@ -97,6 +97,9 @@ class SingleScenario extends Component {
       const { slug, type } = channel;
       // if (type === "background") {
       engine.stopHowl(slug);
+      if (type === "random") {
+        engine.stopOneRandomChannel(channel);
+      }
       // }
     });
   };
@@ -222,14 +225,34 @@ class SingleScenario extends Component {
       };
     });
     engine.loadHowlsForOneChannel(newChannel);
-    console.log(newChannel);
     setTimeout(() => {
       const { type, urls, slug, frequency } = newChannel;
       if (type === "background") {
         engine.playHowl(urls[0], 0.5, 0);
       } else {
-        engine.loop(slug, frequency, this.playNextRandomSound);
+        engine.startOneRandomChannel(slug, frequency, this.playNextRandomSound);
       }
+    });
+  };
+
+  deleteChannel = slug => {
+    const { channels } = this.state;
+    const channelsToNotDelete = channels.filter(channel => {
+      return channel.slug !== slug;
+    });
+    const channelToDelete = channels.filter(channel => {
+      return channel.slug === slug;
+    })[0];
+    channelToDelete.urls.forEach(url => {
+      engine.stopHowl(url);
+      if (channelToDelete.type === "random") {
+        engine.stopOneRandomChannel(channelToDelete);
+      }
+    });
+    this.setState({
+      channels: channelsToNotDelete.sort((a, b) => {
+        return a.id - b.id;
+      })
     });
   };
 
@@ -283,6 +306,7 @@ class SingleScenario extends Component {
             changePan={this.changePan}
             playNextRandomSound={this.playNextRandomSound}
             addChannel={this.addChannel}
+            deleteChannel={this.deleteChannel}
           />
           <Transport
             startScenario={this.startScenario}

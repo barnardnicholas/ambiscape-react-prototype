@@ -3,6 +3,7 @@ const { Howl, Howler } = require("howler");
 // const spatial = require("howler/src/plugins/howler.spatial.js");
 
 let allHowls = {};
+let loops = {};
 let shouldPlay = false;
 
 const createHowl = (channel, url) => {
@@ -20,6 +21,9 @@ const createHowl = (channel, url) => {
   const thisHowl = new Howl(howlData);
 
   allHowls[url] = thisHowl;
+  if (type === "random") {
+    loops[slug] = true;
+  }
 };
 
 export const loadHowlsForOneChannel = channel => {
@@ -108,6 +112,19 @@ export const stopRandomHowls = () => {
   shouldPlay = false;
 };
 
+export const startOneRandomChannel = (slug, frequency, playNext) => {
+  loops[slug] = true;
+  loop(slug, frequency, playNext);
+};
+
+export const stopOneRandomChannel = channel => {
+  const { slug, urls } = channel;
+  loops[slug] = false;
+  // urls.forEach(url => {
+  //   allHowls[url] = null;
+  // });
+};
+
 export const clearAllHowls = () => {
   console.log("clearAllHowls");
   shouldPlay = false;
@@ -120,14 +137,13 @@ export const loop = (slug, frequency, playNext) => {
   const standardInterval = (1 - frequency) * 16000 + 4000;
   const intervalVariation = (standardInterval / 5) * Math.random();
   const thisInterval = standardInterval + intervalVariation;
-
-  setTimeout(() => {
-    if (shouldPlay) {
+  if (loops[slug]) {
+    setTimeout(() => {
       playNext(slug);
       console.log(`Interval: ${thisInterval}ms`);
       loop(slug, frequency, playNext);
-    }
-  }, thisInterval);
+    }, thisInterval);
+  }
 };
 
 export const muteAll = () => {

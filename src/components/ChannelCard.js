@@ -117,6 +117,12 @@ class ChannelCard extends Component {
     toggleSoloChannel(slug);
   };
 
+  handleDelete = () => {
+    const { deleteChannel } = this.props;
+    const { slug } = this.state;
+    deleteChannel(slug);
+  };
+
   render() {
     const { name, id, type } = this.state;
     const { isHighlighted } = this.props;
@@ -234,6 +240,7 @@ class ChannelCard extends Component {
                 width="16px"
               />
             </button>
+            <button onClick={this.handleDelete}>Del</button>
           </div>
         </li>
       );
@@ -265,6 +272,7 @@ class ChannelCard extends Component {
                 width="16px"
               />
             </button>
+            <button onClick={this.handleDelete}>Del</button>
           </div>
         </li>
       );
