@@ -1,11 +1,12 @@
 import * as firebase from "firebase/app";
+import * as app from "../App";
 import "firebase/auth/";
 
 // DEVELOPMENT ONLY - LOCALLY-STORED API KEY FOR FIREBASE
 // import firebaseLocalConfig from "../auth_ignore/firebase-config";
-// const firebaseConfig =
-//   process.env.NODE_ENV === "production" ? envConfig : firebaseLocalConfig;
+// firebase.initializeApp(firebaseLocalConfig);
 
+// PRODUCTION ONLY - NETLIFY ENV VARIABLES
 const envConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
@@ -15,7 +16,6 @@ const envConfig = {
   messagingSenderId: process.env.REACT_APP_CLIENTID,
   appId: process.env.REACT_APP_APPID
 };
-
 firebase.initializeApp(envConfig);
 
 export const updateAuthState = () => {
@@ -29,11 +29,7 @@ export const signIn = (email, password) => {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(response => {
-      const { email, uid } = response.user;
-      return uid;
-    })
-    .catch(err => {
-      console.log(err);
+      return response;
     });
 };
 

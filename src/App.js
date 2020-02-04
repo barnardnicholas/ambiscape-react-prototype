@@ -8,9 +8,15 @@ import Login from "./components/Login";
 import users from "./data/users";
 import ErrorPage from "./components/ErrorPage";
 import * as firebase from "./utils/user-auth";
+import ErrorPopup from "./components/ErrorPopup";
 
 class App extends Component {
   state = {
+    hasError: false,
+    error: {
+      code: "",
+      message: ""
+    },
     testUsers: false,
     currentUser: {
       username: "",
@@ -46,37 +52,69 @@ class App extends Component {
         navigate("/error");
       }
     } else {
-      firebase.signIn(email, password).then(uid => {
-        const filteredUser = users.filter(user => {
-          return user.fb_uid === uid;
-        })[0];
-        const {
-          username,
-          name,
-          user_id,
-          fb_uid,
-          email,
-          avatar_url,
-          saved_scenarios
-        } = filteredUser;
-        this.setState({
-          currentUser: {
-            username: username,
-            user_id: user_id,
-            email: email,
-            fb_uid: fb_uid,
-            name: name,
-            avatar_url: avatar_url,
-            saved_scenarios: saved_scenarios
+      firebase
+        .signIn(email, password)
+        .then(response => {
+          if (response.hasOwnProperty("err")) {
+            console.log(response);
+          } else {
+            console.log(response);
+            const filteredUser = users.filter(user => {
+              return user.fb_uid === response.user.uid;
+            })[0];
+            const {
+              username,
+              name,
+              user_id,
+              fb_uid,
+              email,
+              avatar_url,
+              saved_scenarios
+            } = filteredUser;
+            this.setState({
+              currentUser: {
+                username: username,
+                user_id: user_id,
+                email: email,
+                fb_uid: fb_uid,
+                name: name,
+                avatar_url: avatar_url,
+                saved_scenarios: saved_scenarios
+              }
+            });
+            navigate("/");
           }
+        })
+        .catch(err => {
+          const { code, message } = err;
+          this.setState({
+            hasError: true,
+            error: { code: code, message: message }
+          });
         });
-      });
-      navigate("/");
     }
   };
 
   createUser = (email, password) => {
     firebase.createUser(email, password);
+  };
+
+  renderErrorPopup() {
+    const { hasError, error } = this.state;
+    if (hasError) {
+      return (
+        <ErrorPopup
+          code={error.code}
+          message={error.message}
+          closeError={this.closeErrorPopup}
+        />
+      );
+    }
+  }
+
+  closeErrorPopup = () => {
+    const { hasError, error } = this.state;
+    this.setState({ hasError: false, error: { code: "", message: "" } });
   };
 
   componentDidMount() {}
@@ -102,6 +140,7 @@ class App extends Component {
             <ErrorPage path="/error" />
             <ErrorPage default />
           </Router>
+          {this.renderErrorPopup()}
         </div>
       </center>
     );
