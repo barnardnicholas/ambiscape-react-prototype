@@ -22,18 +22,16 @@ export default class Login extends Component {
     event.preventDefault();
   }
 
-  handleLogIn = event => {
-    console.log("Log In");
+  handleLogIn = () => {
     const { usernameInput, passwordInput } = this.state;
     const { switchUser } = this.props;
     switchUser(usernameInput, passwordInput);
   };
 
-  handleSignUp = event => {
-    console.log("Sign Up");
+  handleSignUp = () => {
     const { usernameInput, passwordInput } = this.state;
     const { createUser } = this.props;
-    createUser(usernameInput, passwordInput)
+    createUser(usernameInput, passwordInput);
   };
 
   render() {

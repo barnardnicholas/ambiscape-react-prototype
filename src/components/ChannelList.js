@@ -37,11 +37,36 @@ const ChannelList = ({
     );
   };
 
-  const renderChannelAdder = (type) => {
-    return (
-    <AddChannel type={type} key={`${type}Adder`} slug={`${type}Adder`} channels={channels} isHighlighted={highlightedChannel === `${type}Adder` ? true : false} toggleHighlight={toggleHighlightedChannel} addChannel={addChannel}/>
-    )
-  }
+  const renderChannelAdder = type => {
+    const channelsOfThisType = channels.filter(channel => {
+      return channel.type === type;
+    });
+    if (type === "background" && channelsOfThisType.length < 3) {
+      return (
+        <AddChannel
+          type={type}
+          key={`${type}Adder`}
+          slug={`${type}Adder`}
+          channels={channels}
+          isHighlighted={highlightedChannel === `${type}Adder` ? true : false}
+          toggleHighlight={toggleHighlightedChannel}
+          addChannel={addChannel}
+        />
+      );
+    } else if (type === "random" && channelsOfThisType.length < 5) {
+      return (
+        <AddChannel
+          type={type}
+          key={`${type}Adder`}
+          slug={`${type}Adder`}
+          channels={channels}
+          isHighlighted={highlightedChannel === `${type}Adder` ? true : false}
+          toggleHighlight={toggleHighlightedChannel}
+          addChannel={addChannel}
+        />
+      );
+    } else return null;
+  };
 
   if (channels.length > 0) {
     return (

@@ -55,35 +55,30 @@ class App extends Component {
       firebase
         .signIn(email, password)
         .then(response => {
-          if (response.hasOwnProperty("err")) {
-            console.log(response);
-          } else {
-            console.log(response);
-            const filteredUser = users.filter(user => {
-              return user.fb_uid === response.user.uid;
-            })[0];
-            const {
-              username,
-              name,
-              user_id,
-              fb_uid,
-              email,
-              avatar_url,
-              saved_scenarios
-            } = filteredUser;
-            this.setState({
-              currentUser: {
-                username: username,
-                user_id: user_id,
-                email: email,
-                fb_uid: fb_uid,
-                name: name,
-                avatar_url: avatar_url,
-                saved_scenarios: saved_scenarios
-              }
-            });
-            navigate("/");
-          }
+          const filteredUser = users.filter(user => {
+            return user.fb_uid === response.user.uid;
+          })[0];
+          const {
+            username,
+            name,
+            user_id,
+            fb_uid,
+            email,
+            avatar_url,
+            saved_scenarios
+          } = filteredUser;
+          this.setState({
+            currentUser: {
+              username: username,
+              user_id: user_id,
+              email: email,
+              fb_uid: fb_uid,
+              name: name,
+              avatar_url: avatar_url,
+              saved_scenarios: saved_scenarios
+            }
+          });
+          navigate("/");
         })
         .catch(err => {
           const { code, message } = err;
