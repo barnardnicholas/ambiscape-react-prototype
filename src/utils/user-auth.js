@@ -1,6 +1,10 @@
 import * as firebase from "firebase/app";
 import "firebase/auth/";
+
+// DEVELOPMENT ONLY - LOCALLY-STORED API KEY FOR FIREBASE
 // import firebaseLocalConfig from "../auth_ignore/firebase-config";
+// const firebaseConfig =
+//   process.env.NODE_ENV === "production" ? envConfig : firebaseLocalConfig;
 
 const envConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
@@ -11,9 +15,6 @@ const envConfig = {
   messagingSenderId: process.env.REACT_APP_CLIENTID,
   appId: process.env.REACT_APP_APPID
 };
-
-// const firebaseConfig =
-//   process.env.NODE_ENV === "production" ? envConfig : firebaseLocalConfig;
 
 firebase.initializeApp(envConfig);
 
