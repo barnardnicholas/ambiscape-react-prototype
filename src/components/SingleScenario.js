@@ -21,6 +21,47 @@ class SingleScenario extends Component {
     soloChannel: ""
   };
 
+  loadScenario = () => {
+    const { scenario_id } = this.props;
+    const filteredScenario = scenarios.filter(scenario => {
+      return scenario.slug === scenario_id;
+    })[0];
+    const {
+      name,
+      slug,
+      creator_id,
+      color_scheme,
+      is_public,
+      likes
+    } = filteredScenario;
+    const newChannels = [];
+    filteredScenario.sounds.forEach(sound => {
+      const { id } = sound;
+      const filteredSound = sounds.filter(sound => {
+        return sound.id === id;
+      })[0];
+      const newChannel = {
+        ...filteredSound,
+        ...sound,
+        playQueue: filteredSound.urls
+      };
+      newChannels.push(newChannel);
+    });
+    newChannels.sort((a, b) => {
+      return a.id - b.id;
+    });
+    this.setState({
+      name: name,
+      slug: slug,
+      creator_id: creator_id,
+      color_scheme: color_scheme,
+      is_public: is_public,
+      likes: likes,
+      channels: newChannels
+    });
+    engine.loadAllHowls(newChannels);
+  }
+
   startScenario = () => {
     // const { randomSoundSpawner } = this;
     const { playing, name, channels } = this.state;
@@ -34,7 +75,7 @@ class SingleScenario extends Component {
       });
       randomChannels.forEach(channel => {
         const { slug } = channel;
-        const { playQueue, frequency } = channel;
+        const { frequency } = channel;
         engine.startRandomHowls();
         engine.loop(slug, frequency, this.playNextRandomSound);
       });
@@ -160,6 +201,30 @@ class SingleScenario extends Component {
     this.setState({ channels: newChannels });
   };
 
+  addChannel = (sound) => {
+    console.log(sound)
+    const newChannel = {
+      ...sound,
+      volume: 0.5,
+      pan: 0
+    }
+    if (sound.type === "random") {
+      newChannel.frequency = 0.2
+    }
+    this.setState(currentState => {
+      return {
+        ...currentState,
+        channels: [
+          ...currentState.channels,
+          newChannel
+        ].sort((a, b) => {
+          return a.id - b.id;
+        })
+      }
+    })
+    engine.loadHowlsForOneChannel(newChannel)
+  }
+
   render() {
     const {
       name,
@@ -183,6 +248,7 @@ class SingleScenario extends Component {
             changeFrequency={this.changeFrequency}
             changePan={this.changePan}
             playNextRandomSound={this.playNextRandomSound}
+            addChannel={this.addChannel}
           />
           <Transport
             startScenario={this.startScenario}
@@ -194,44 +260,7 @@ class SingleScenario extends Component {
   }
 
   componentDidMount() {
-    const { scenario_id } = this.props;
-    const filteredScenario = scenarios.filter(scenario => {
-      return scenario.slug === scenario_id;
-    })[0];
-    const {
-      name,
-      slug,
-      creator_id,
-      color_scheme,
-      is_public,
-      likes
-    } = filteredScenario;
-    const newChannels = [];
-    filteredScenario.sounds.forEach(sound => {
-      const { id } = sound;
-      const filteredSound = sounds.filter(sound => {
-        return sound.id === id;
-      })[0];
-      const newChannel = {
-        ...filteredSound,
-        ...sound,
-        playQueue: filteredSound.urls
-      };
-      newChannels.push(newChannel);
-    });
-    newChannels.sort((a, b) => {
-      return a.id - b.id;
-    });
-    this.setState({
-      name: name,
-      slug: slug,
-      creator_id: creator_id,
-      color_scheme: color_scheme,
-      is_public: is_public,
-      likes: likes,
-      channels: newChannels
-    });
-    engine.loadAllHowls(newChannels);
+    this.loadScenario()
   }
 
   componentDidUpdate() {}

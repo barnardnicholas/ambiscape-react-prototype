@@ -11,8 +11,11 @@ import * as firebase from './utils/user-auth'
 
 class App extends Component {
   state = {
+    testUsers: false,
     currentUser: {
       username: "",
+      fb_uid: "",
+      email: "",
       user_id: 0,
       name: "",
       avatar_url: "",
@@ -32,19 +35,18 @@ class App extends Component {
 
   switchUser = (email, password) => {
     const { currentUser, testUsers } = this.state;
-    // if (testUsers) {
-    //   const filteredUser = users.filter(user => {
-    //     return user.username === username;
-    //   })[0];
-    //   if (filteredUser) {
-    //     this.setState({ currentUser: filteredUser });
-    //     navigate("/");
-    //   } else {
-    //     navigate("/error");
-    //   }
-    // } else {
-      // this will be replaced with REST backend
-      console.log(`password ${password}`)
+    if (testUsers) {
+
+      const filteredUser = users.filter(user => {
+        return user.email === email;
+      })[0];
+      if (filteredUser) {
+        this.setState({ currentUser: filteredUser });
+        navigate("/");
+      } else {
+        navigate("/error");
+      }
+    } else {
       firebase.signIn(email, password).then(uid => {
         const filteredUser = users.filter(user => {
           return user.fb_uid === uid
@@ -64,7 +66,7 @@ class App extends Component {
         });
       })
       navigate("/");
-    // }
+    }
   };
 
   createUser = (email, password) => {

@@ -22,6 +22,13 @@ const createHowl = (channel, url) => {
   allHowls[url] = thisHowl;
 };
 
+export const loadHowlsForOneChannel = (channel) => {
+  const { urls } = channel;
+    urls.forEach(url => {
+      createHowl(channel, url);
+    });
+}
+
 export const loadAllHowls = channels => {
   channels.forEach(channel => {
     const { urls, slug } = channel;
@@ -66,7 +73,6 @@ export const stopHowl = url => {
 
 export const changeVolumeOfHowl = (url, volume) => {
   if (allHowls[url]) {
-    console.log(allHowls[url]);
     allHowls[url].volume(volume);
   }
 };

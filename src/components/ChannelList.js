@@ -1,6 +1,7 @@
 import React from "react";
 import ChannelCard from "./ChannelCard";
 import * as styles from "../styles";
+import AddChannel from "./AddChannel";
 
 const ChannelList = ({
   highlightedChannel,
@@ -12,7 +13,8 @@ const ChannelList = ({
   changePan,
   channels,
   playing,
-  playNextRandomSound
+  playNextRandomSound,
+  addChannel
 }) => {
   const renderChannelCard = sound => {
     return (
@@ -35,6 +37,12 @@ const ChannelList = ({
     );
   };
 
+  const renderChannelAdder = (type) => {
+    return (
+    <AddChannel type={type} key={`${type}Adder`} slug={`${type}Adder`} channels={channels} isHighlighted={highlightedChannel === `${type}Adder` ? true : false} toggleHighlight={toggleHighlightedChannel} addChannel={addChannel}/>
+    )
+  }
+
   if (channels.length > 0) {
     return (
       <center className="channellist">
@@ -47,14 +55,14 @@ const ChannelList = ({
               return renderChannelCard(sound);
             }
           })}
-          <li>+</li>
+          {renderChannelAdder("background")}
           <li key="randomlabel">Random Sounds</li>
           {channels.map(sound => {
             if (sound.type === "random") {
               return renderChannelCard(sound);
             }
           })}
-          <li>+</li>
+          {renderChannelAdder("random")}
         </ul>
       </center>
     );

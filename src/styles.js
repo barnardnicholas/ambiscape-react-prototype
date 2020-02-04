@@ -50,7 +50,8 @@ export const listButtonStyling = {
   borderRadius: "6px",
   outline: "none",
   fontFamily: "DIN Condensed Bold",
-  fontSize: "12px"
+  fontSize: "12px",
+  margin: 0
 };
 
 export const transportButtonStyling = {
@@ -85,3 +86,15 @@ export const footerBackgroundStyling = {
   margin: "0px",
   padding: "0px"
 };
+
+export const labelStyling = {
+  margin: "0px 40px 0px 4px"
+}
+
+export const selectStyling = {
+  backgroundColor: "transparent",
+  color: "#ffffff",
+  fontFamily: "DIN Condensed Bold",
+  fontSize: "16px",
+  margin: "0px 0px 0px 8px"
+}

@@ -27,7 +27,6 @@ class ScenarioList extends Component {
   }
 
   loadPresetScenarios = () => {
-    console.log("Loading preset scenarios");
     const presetScenarios = api.getPresetScenarios();
     this.setState({
       scenarios: presetScenarios,
@@ -37,7 +36,6 @@ class ScenarioList extends Component {
 
   loadSavedScenarios = () => {
     const { user_id } = this.props.currentUser;
-    console.log(`Loading scenarios for ${user_id}`);
     const savedScenarios = api.getScenariosByUserId(user_id);
     this.setState({
       scenarios: savedScenarios,
