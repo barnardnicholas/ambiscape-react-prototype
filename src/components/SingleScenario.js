@@ -43,7 +43,7 @@ class SingleScenario extends Component {
       const newChannel = {
         ...filteredSound,
         ...sound,
-        playQueue: filteredSound.urls
+        playQueue: filteredSound.urls.sort(() => Math.random() - 0.5)
       };
       newChannels.push(newChannel);
     });
@@ -60,7 +60,7 @@ class SingleScenario extends Component {
       channels: newChannels
     });
     engine.loadAllHowls(newChannels);
-  }
+  };
 
   startScenario = () => {
     // const { randomSoundSpawner } = this;
@@ -201,29 +201,36 @@ class SingleScenario extends Component {
     this.setState({ channels: newChannels });
   };
 
-  addChannel = (sound) => {
-    console.log(sound)
+  addChannel = sound => {
+    console.log(sound);
     const newChannel = {
       ...sound,
       volume: 0.5,
       pan: 0
-    }
+    };
     if (sound.type === "random") {
-      newChannel.frequency = 0.2
+      newChannel.frequency = 0.2;
+      newChannel.playQueue = sound.urls.sort(() => Math.random() - 0.5);
     }
     this.setState(currentState => {
       return {
         ...currentState,
-        channels: [
-          ...currentState.channels,
-          newChannel
-        ].sort((a, b) => {
+        channels: [...currentState.channels, newChannel].sort((a, b) => {
           return a.id - b.id;
         })
+      };
+    });
+    engine.loadHowlsForOneChannel(newChannel);
+    console.log(newChannel);
+    setTimeout(() => {
+      const { type, urls, slug, frequency } = newChannel;
+      if (type === "background") {
+        engine.playHowl(urls[0], 0.5, 0);
+      } else {
+        engine.loop(slug, frequency, this.playNextRandomSound);
       }
-    })
-    engine.loadHowlsForOneChannel(newChannel)
-  }
+    });
+  };
 
   render() {
     const {
@@ -260,7 +267,7 @@ class SingleScenario extends Component {
   }
 
   componentDidMount() {
-    this.loadScenario()
+    this.loadScenario();
   }
 
   componentDidUpdate() {}
