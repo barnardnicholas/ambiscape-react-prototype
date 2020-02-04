@@ -1,6 +1,6 @@
 import * as firebase from "firebase/app";
 import "firebase/auth/";
-import firebaseLocalConfig from "../auth_ignore/firebase-config";
+// import firebaseLocalConfig from "../auth_ignore/firebase-config";
 
 const envConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
@@ -12,10 +12,10 @@ const envConfig = {
   appId: process.env.REACT_APP_APPID
 };
 
-const firebaseConfig =
-  process.env.NODE_ENV === "production" ? envConfig : firebaseLocalConfig;
+// const firebaseConfig =
+//   process.env.NODE_ENV === "production" ? envConfig : firebaseLocalConfig;
 
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(envConfig);
 
 export const updateAuthState = () => {
   firebase.auth().onAuthStateChanged(user => {
