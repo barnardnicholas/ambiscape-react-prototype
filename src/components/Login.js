@@ -26,11 +26,14 @@ export default class Login extends Component {
     console.log("Log In");
     const { usernameInput, passwordInput } = this.state;
     const { switchUser } = this.props;
-    switchUser(usernameInput);
+    switchUser(usernameInput, passwordInput);
   };
 
   handleSignUp = event => {
     console.log("Sign Up");
+    const { usernameInput, passwordInput } = this.state;
+    const { createUser } = this.props;
+    createUser(usernameInput, passwordInput)
   };
 
   render() {

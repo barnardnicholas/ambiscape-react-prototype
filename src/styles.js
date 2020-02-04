@@ -48,7 +48,9 @@ export const listButtonStyling = {
   color: "#ffffff",
   width: "150px",
   borderRadius: "6px",
-  outline: "none"
+  outline: "none",
+  fontFamily: "DIN Condensed Bold",
+  fontSize: "12px"
 };
 
 export const transportButtonStyling = {
