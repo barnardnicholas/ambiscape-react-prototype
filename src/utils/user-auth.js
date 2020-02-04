@@ -1,11 +1,11 @@
 import * as firebase from "firebase/app";
 import * as app from "../App";
 import "firebase/auth/";
-
+//------------------------
 // DEVELOPMENT ONLY - LOCALLY-STORED API KEY FOR FIREBASE
 // import firebaseLocalConfig from "../auth_ignore/firebase-config";
 // firebase.initializeApp(firebaseLocalConfig);
-
+//------------------------
 // PRODUCTION ONLY - NETLIFY ENV VARIABLES
 const envConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
@@ -17,6 +17,7 @@ const envConfig = {
   appId: process.env.REACT_APP_APPID
 };
 firebase.initializeApp(envConfig);
+//------------------------
 
 export const updateAuthState = () => {
   firebase.auth().onAuthStateChanged(user => {

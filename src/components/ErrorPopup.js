@@ -3,7 +3,7 @@ import * as styles from "../styles";
 
 const ErrorPopup = ({ code, message, closeError }) => {
   const tileSize = {
-    // maxWidth: "300px",
+    maxWidth: "300px",
     width: "90%",
     height: "110px"
   };
