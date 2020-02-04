@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as engine from "../utils/audio-engine";
+import * as styles from "../styles";
 
 class ChannelCard extends Component {
   state = {
@@ -169,39 +170,19 @@ class ChannelCard extends Component {
       );
     };
 
-    const styling = {
-      margin: 0,
-      padding: "6px",
-      position: "relative"
-    };
-
-    const listStyle = {
-      position: "50% 50%",
-      margin: "8px 16px",
-      width: "80%",
-      maxWidth: "300px"
-    };
-
-    const backgroundStyling = {
-      position: "absolute",
+    const tileSizeStyling = {
       width: "80%",
       height: isHighlighted ? "130px" : "56px",
-      margin: "0px",
-      padding: "0px",
-      borderRadius: "6px",
-      borderWidth: "1px",
-      borderStyle: "solid",
-      borderColor: "#ffffff",
-      backgroundColor: "#000000",
-      opacity: "0.5",
       maxWidth: "300px"
     };
 
     if (isHighlighted) {
       return (
-        <li key={id} style={listStyle}>
-          <div style={backgroundStyling}></div>
-          <div style={styling}>
+        <li key={id} style={styles.tileLIStyling}>
+          <div
+            style={{ ...styles.tileBackgroundStyling, ...tileSizeStyling }}
+          ></div>
+          <div style={styles.tileContentStyling}>
             <label>{name}</label>
             <br />
             {renderChannelButtons()}
@@ -217,11 +198,13 @@ class ChannelCard extends Component {
       );
     } else {
       return (
-        <li key={id} style={listStyle}>
+        <li key={id} style={styles.tileLIStyling}>
           <center>
-            <div style={backgroundStyling}></div>
+            <div
+              style={{ ...styles.tileBackgroundStyling, ...tileSizeStyling }}
+            ></div>
           </center>
-          <div style={styling}>
+          <div style={styles.tileContentStyling}>
             <label>{name}</label>
             <br />
             {renderChannelVolume()}

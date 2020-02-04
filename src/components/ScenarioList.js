@@ -7,34 +7,48 @@ import ScenarioListFooter from "./ScenarioListFooter";
 
 class ScenarioList extends Component {
   state = {
-    scenarios: [
-      {
-        name: "",
-        slug: "",
-        creator_id: 1,
-        color_scheme: ["#561D25", "#CE8147", "#ECDD7B", "#D3E298", "#CDE7BE"],
-        is_public: null,
-        likes: 0,
-        sounds: []
-      }
-    ]
+    scenarios: [],
+    headerText: "Preset Scenarios"
   };
 
   componentDidMount() {
-    const fetchedScenarios = api.getAllScenarios();
-    this.setState({ scenarios: fetchedScenarios });
+    this.loadPresetScenarios();
     engine.clearAllHowls();
   }
+
+  loadPresetScenarios = () => {
+    console.log("Loading preset scenarios");
+    const presetScenarios = api.getAllScenarios();
+    this.setState({
+      scenarios: presetScenarios,
+      headerText: "Preset Scenarios"
+    });
+  };
+
+  loadSavedScenarios = () => {
+    const { user_id } = this.props.currentUser;
+    console.log(`Loading scenarios for ${user_id}`);
+    const savedScenarios = api.getScenariosByUserId(user_id);
+    this.setState({
+      scenarios: savedScenarios,
+      headerText: "My Saved Scenarios"
+    });
+  };
 
   renderFooter = () => {
     const { username, name } = this.props.currentUser;
     if (username) {
-      return <ScenarioListFooter />;
+      return (
+        <ScenarioListFooter
+          loadPresetScenarios={this.loadPresetScenarios}
+          loadSavedScenarios={this.loadSavedScenarios}
+        />
+      );
     } else return null;
   };
 
   render() {
-    const { scenarios } = this.state;
+    const { scenarios, headerText } = this.state;
     const styling = {
       margin: "70px 0px",
       padding: "0px",
@@ -42,7 +56,7 @@ class ScenarioList extends Component {
     };
     return (
       <>
-        <Header headerText="Scenarios" />
+        <Header headerText={headerText} />
         <div style={{ overflow: "hidden" }}>
           <ul style={styling}>
             {scenarios.map(scenario => {

@@ -18,3 +18,9 @@ export const getSoundById = id => {
 export const getAllScenarios = () => {
   return scenarios;
 };
+
+export const getScenariosByUserId = id => {
+  return scenarios.filter(scenario => {
+    return scenario.creator_id === id;
+  });
+};

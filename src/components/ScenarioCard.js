@@ -1,13 +1,8 @@
 import React from "react";
 import { Link } from "@reach/router";
+import * as styles from "../styles";
 
 const ScenarioCard = ({ scenario }) => {
-  const styling = {
-    margin: 0,
-    padding: "6px",
-    position: "relative"
-  };
-
   const listStyle = {
     position: "50% 50%",
     margin: "8px 16px",
@@ -15,19 +10,10 @@ const ScenarioCard = ({ scenario }) => {
     maxWidth: "300px"
   };
 
-  const backgroundStyling = {
-    position: "absolute",
+  const tileSize = {
+    maxWidth: "300px",
     width: "76%",
-    height: "56px",
-    margin: "0px",
-    padding: "0px",
-    borderRadius: "6px",
-    borderWidth: "1px",
-    borderStyle: "solid",
-    borderColor: "#ffffff",
-    backgroundColor: "#000000",
-    opacity: "0.5",
-    maxWidth: "300px"
+    height: "56px"
   };
 
   const { name, slug, color_scheme, is_public, likes } = scenario;
@@ -35,8 +21,8 @@ const ScenarioCard = ({ scenario }) => {
   return (
     <li key={slug} style={listStyle}>
       <Link to={`/scenarios/${slug}`} key={slug} className="reactlink">
-        <div style={backgroundStyling}></div>
-        <div style={styling}>
+        <div style={{ ...styles.tileBackgroundStyling, ...tileSize }}></div>
+        <div style={styles.tileContentStyling}>
           <h3>{name}</h3>
           {/* <p>{is_public ? "Public" : "Private"}</p>
       <p>{`${likes} likes`}</p> */}

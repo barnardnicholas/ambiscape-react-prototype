@@ -2,7 +2,7 @@ const scenarios = [
   {
     name: "Forest",
     slug: "forest",
-    creator_id: 1,
+    creator_id: 0,
     color_scheme: [],
     is_public: true,
     likes: 0,
@@ -59,7 +59,7 @@ const scenarios = [
   {
     name: "Beach",
     slug: "beach",
-    creator_id: 1,
+    creator_id: 0,
     color_scheme: [],
     is_public: true,
     likes: 0,
@@ -115,7 +115,7 @@ const scenarios = [
   {
     name: "City",
     slug: "city",
-    creator_id: 1,
+    creator_id: 0,
     color_scheme: [],
     is_public: true,
     likes: 0,
@@ -158,7 +158,7 @@ const scenarios = [
   {
     name: "Woodland Camp",
     slug: "woodland",
-    creator_id: 1,
+    creator_id: 0,
     color_scheme: [],
     is_public: true,
     likes: 0,
@@ -207,7 +207,7 @@ const scenarios = [
   {
     name: "Birdsong",
     slug: "birdsong",
-    creator_id: 1,
+    creator_id: 0,
     color_scheme: [],
     is_public: true,
     likes: 0,
@@ -264,7 +264,7 @@ const scenarios = [
   {
     name: "Waterfall",
     slug: "waterfall",
-    creator_id: 1,
+    creator_id: 0,
     color_scheme: [],
     is_public: true,
     likes: 0,
@@ -300,7 +300,7 @@ const scenarios = [
   {
     name: "Farmyard",
     slug: "farmyard",
-    creator_id: 1,
+    creator_id: 0,
     color_scheme: [],
     is_public: true,
     likes: 0,
@@ -357,7 +357,7 @@ const scenarios = [
   {
     name: "Rainstorm",
     slug: "rainstorm",
-    creator_id: 1,
+    creator_id: 0,
     color_scheme: [],
     is_public: true,
     likes: 0,

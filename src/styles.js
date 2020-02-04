@@ -1,3 +1,33 @@
+export const tileULStyling = {
+  margin: "70px 0px",
+  listStyle: "none",
+  padding: "0px"
+};
+
+export const tileLIStyling = {
+  margin: "8px 16px",
+  width: "80%",
+  maxWidth: "300px"
+};
+
+export const tileContentStyling = {
+  margin: 0,
+  padding: "6px",
+  position: "relative"
+};
+
+export const tileBackgroundStyling = {
+  position: "absolute",
+  margin: "0px",
+  padding: "0px",
+  borderRadius: "6px",
+  borderWidth: "1px",
+  borderStyle: "solid",
+  borderColor: "#ffffff",
+  backgroundColor: "#000000",
+  opacity: "0.5"
+};
+
 export const listButtonStyling = {
   backgroundColor: "transparent",
   borderWidth: "1px",

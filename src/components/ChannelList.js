@@ -1,5 +1,6 @@
 import React from "react";
 import ChannelCard from "./ChannelCard";
+import * as styles from "../styles";
 
 const ChannelList = ({
   highlightedChannel,
@@ -34,18 +35,10 @@ const ChannelList = ({
     );
   };
 
-  const styling = {
-    // border: "1px solid",
-    margin: "70px 0px",
-    listStyle: "none",
-    padding: "0px"
-    // backgroundColor: "#383838"
-  };
-
   if (channels.length > 0) {
     return (
       <center className="channellist">
-        <ul style={styling}>
+        <ul style={styles.tileULStyling}>
           <li key="bglabel" className="channellistlabel">
             Background Sounds
           </li>
