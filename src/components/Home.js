@@ -18,6 +18,36 @@ const Home = ({ currentUser }) => {
     maxWidth: "300px"
   };
 
+  const styling = {
+    margin: 0,
+    padding: "6px",
+    position: "relative"
+  };
+
+  const listStyle = {
+    position: "50% 50%",
+    margin: "100px 16px 16px 16px",
+    padding: "0px",
+    width: "80%",
+    maxWidth: "300px",
+    listStyle: "none"
+  };
+
+  const backgroundStyling = {
+    position: "absolute",
+    width: "76%",
+    height: "56px",
+    margin: "0px",
+    padding: "0px",
+    borderRadius: "6px",
+    borderWidth: "1px",
+    borderStyle: "solid",
+    borderColor: "#ffffff",
+    backgroundColor: "#000000",
+    opacity: "0.5",
+    maxWidth: "300px"
+  };
+
   const renderLoginButton = () => {
     const { username, name } = currentUser;
     if (!username) {
@@ -75,17 +105,26 @@ const Home = ({ currentUser }) => {
         <h3 style={{ fontSize: "20px" }}>Ambient Soundscape Generator</h3>
       </header>
       <ul style={{ ...styles.tileULStyling, ...listSizing }}>
-        <Link to="/scenarios" key="scenarios" className="reactlink">
-          <li>
+        <li>
+          <Link to="/scenarios" key="scenarios" className="reactlink">
             <div
               style={{ ...styles.tileBackgroundStyling, ...backgroundSizing }}
             ></div>
             <div style={styles.tileContentStyling}>
               <h3>Preset Scenarios</h3>
             </div>
-          </li>
-        </Link>
+          </Link>
+        </li>
+
         {renderLoginButton()}
+        <li>
+          <Link to="/options" className="reactlink">
+            <div style={backgroundStyling}></div>
+            <div style={styling}>
+              <h3>Options</h3>
+            </div>
+          </Link>
+        </li>
         {renderSavedScenarios()}
       </ul>
       {renderFooter()}
