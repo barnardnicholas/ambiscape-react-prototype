@@ -8,6 +8,7 @@ const ChannelList = ({
   soloChannel,
   toggleHighlightedChannel,
   toggleSoloChannel,
+  toggleMuteChannel,
   changeVolume,
   changeFrequency,
   changePan,
@@ -28,6 +29,7 @@ const ChannelList = ({
         isHighlighted={highlightedChannel === sound.slug ? true : false}
         toggleHighlight={toggleHighlightedChannel}
         toggleSoloChannel={toggleSoloChannel}
+        toggleMuteChannel={toggleMuteChannel}
         volume={sound.volume}
         pan={sound.pan}
         frequency={sound.frequency}

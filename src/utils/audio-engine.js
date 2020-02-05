@@ -88,6 +88,29 @@ export const changePanOfHowl = (url, pan) => {
   }
 };
 
+export const toggleMuteHowl = url => {
+  const currentMuteState = allHowls[url].mute();
+  allHowls[url].mute(!currentMuteState);
+};
+
+export const soloChannel = channel => {
+  const { urls } = channel;
+  const allURLs = Object.keys(allHowls);
+  allURLs.forEach(url => {
+    allHowls[url].mute(true);
+  });
+  urls.forEach(url => {
+    allHowls[url].mute(false);
+  });
+};
+
+export const unSoloChannel = () => {
+  const allURLs = Object.keys(allHowls);
+  allURLs.forEach(url => {
+    allHowls[url].mute(false);
+  });
+};
+
 export const playBackgroundHowls = channels => {
   if (!allHowls) {
     console.log("ERROR = No sounds loaded");
@@ -141,6 +164,7 @@ export const loop = (slug, frequency, playNext) => {
     setTimeout(() => {
       playNext(slug);
       console.log(`Interval: ${thisInterval}ms`);
+
       loop(slug, frequency, playNext);
     }, thisInterval);
   }

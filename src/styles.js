@@ -117,7 +117,8 @@ export const channelButtonStyling = {
   backgroundColor: "transparent",
   color: "#ffffff",
   padding: 0,
-  outline: "none"
+  outline: "none",
+  borderRadius: "6px"
 };
 
 export const channelLabelStyling = {

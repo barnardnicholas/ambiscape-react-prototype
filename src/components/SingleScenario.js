@@ -143,9 +143,26 @@ class SingleScenario extends Component {
   };
 
   toggleSoloChannel = slug => {
-    const { soloChannel } = this.state;
-    this.setState({
-      soloChannel: soloChannel === slug ? "" : slug
+    const { soloChannel, channels } = this.state;
+    if (soloChannel === slug) {
+      this.setState({
+        soloChannel: ""
+      });
+      engine.unSoloChannel(channels);
+    } else {
+      this.setState({
+        soloChannel: slug
+      });
+      const filteredChannel = channels.filter(channel => {
+        return channel.slug === slug;
+      })[0];
+      engine.soloChannel(filteredChannel);
+    }
+  };
+
+  toggleMuteChannel = urls => {
+    urls.forEach(url => {
+      engine.toggleMuteHowl(url);
     });
   };
 
@@ -299,6 +316,7 @@ class SingleScenario extends Component {
             playing={playing}
             toggleHighlightedChannel={this.toggleHighlightedChannel}
             toggleSoloChannel={this.toggleSoloChannel}
+            toggleMuteChannel={this.toggleMuteChannel}
             highlightedChannel={highlightedChannel}
             soloChannel={soloChannel}
             changeVolume={this.changeVolume}

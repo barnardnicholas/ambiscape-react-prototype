@@ -5,6 +5,7 @@ import expand from "../assets/gui/expand.png";
 import collapse from "../assets/gui/collapse.png";
 import solo from "../assets/gui/solo.png";
 import mute from "../assets/gui/mute.png";
+import del from "../assets/gui/x.png";
 
 class ChannelCard extends Component {
   state = {
@@ -109,7 +110,12 @@ class ChannelCard extends Component {
     toggleHighlight(slug);
   };
 
-  handleToggleMute = () => {};
+  handleToggleMute = () => {
+    const { toggleMuteChannel } = this.props;
+    const { slug, urls } = this.state;
+    console.log(`toggle mute for ${slug}`);
+    toggleMuteChannel(urls);
+  };
 
   handleToggleSolo = () => {
     const { slug } = this.state;
@@ -152,19 +158,21 @@ class ChannelCard extends Component {
             onClick={this.handleToggleMute}
             style={{
               ...styles.channelButtonStyling,
-              margin: "0px 8px"
+              margin: "0px 8px",
+              borderStyle: "solid"
             }}
           >
-            <img src={mute} alt="Mute" height="16px" width="16px" />
+            {/* <img src={mute} alt="Mute" height="16px" width="16px" /> */}M
           </button>
           <button
             onClick={this.handleToggleSolo}
             style={{
               ...styles.channelButtonStyling,
-              margin: "0px 8px"
+              margin: "0px 8px",
+              borderStyle: "solid"
             }}
           >
-            <img src={solo} alt="Solo" height="16px" width="16px" />
+            {/* <img src={solo} alt="Solo" height="16px" width="16px" /> */}S
           </button>
         </>
       );
@@ -240,7 +248,12 @@ class ChannelCard extends Component {
                 width="16px"
               />
             </button>
-            <button onClick={this.handleDelete}>Del</button>
+            <button
+              onClick={this.handleDelete}
+              style={styles.channelButtonStyling}
+            >
+              <img src={del} alt="Delete" height="16px" width="16px" />
+            </button>
           </div>
         </li>
       );
@@ -272,7 +285,12 @@ class ChannelCard extends Component {
                 width="16px"
               />
             </button>
-            <button onClick={this.handleDelete}>Del</button>
+            <button
+              onClick={this.handleDelete}
+              style={styles.channelButtonStyling}
+            >
+              <img src={del} alt="Delete" height="16px" width="16px" />
+            </button>
           </div>
         </li>
       );

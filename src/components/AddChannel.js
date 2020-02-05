@@ -21,9 +21,12 @@ export default class AddChannel extends Component {
   handleAddChannel = () => {
     const { adderOption } = this.state;
     const { addChannel } = this.props;
-    const thisChannel = api.getSoundBySlug(adderOption);
-    addChannel(thisChannel);
-    this.setState({ adderOption: "" });
+    console.log(adderOption);
+    if (adderOption) {
+      const thisChannel = api.getSoundBySlug(adderOption);
+      addChannel(thisChannel);
+      this.setState({ adderOption: "" });
+    }
   };
 
   getSoundsForAdder = () => {
@@ -96,6 +99,7 @@ export default class AddChannel extends Component {
               onChange={this.handleChange}
               placeholder="Choose a channel"
             >
+              <option></option>
               {soundsForAdder.map(sound => {
                 const { slug, name } = sound;
                 return (
@@ -125,7 +129,7 @@ export default class AddChannel extends Component {
   }
 
   componentDidMount() {
-    const defaultAdderOption = this.getSoundsForAdder()[0].slug;
-    this.setState({ adderOption: defaultAdderOption });
+    // const defaultAdderOption = this.getSoundsForAdder()[0].slug;
+    // this.setState({ adderOption: defaultAdderOption });
   }
 }
