@@ -82,16 +82,20 @@ class App extends Component {
         })
         .catch(err => {
           const { code, message } = err;
-          this.setState({
-            hasError: true,
-            error: { code: code, message: message }
-          });
+          this.throwError(code, message);
         });
     }
   };
 
   createUser = (email, password) => {
     firebase.createUser(email, password);
+  };
+
+  throwError = (code, message) => {
+    this.setState({
+      hasError: true,
+      error: { code: code, message: message }
+    });
   };
 
   renderErrorPopup() {

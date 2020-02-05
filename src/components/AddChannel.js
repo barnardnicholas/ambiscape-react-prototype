@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import * as styles from "../styles";
 import sounds from "../data/sounds";
-import * as api from "../utils/api";
+// import * as api from "../utils/api";
+import * as api from "../utils/dummy-api";
 
 export default class AddChannel extends Component {
   state = {

@@ -2,59 +2,80 @@ import sounds from "../data/sounds";
 import scenarios from "../data/scenarios";
 import users from "../data/users";
 import * as utils from "../utils/utils";
+import axios from "axios";
 
-export const getScenarioBySlug = slug => {
-  return scenarios.filter(scenario => {
-    return scenario.slug === slug;
-  })[0];
-};
+const baseURL = "";
 
-export const getScenarioById = id => {
-  return scenarios.filter(scenario => {
-    return scenario.id === id;
-  })[0];
-};
-
-export const getSoundById = id => {
-  return sounds.filter(sound => {
-    return sound.id === id;
-  })[0];
-};
-
-export const getSoundBySlug = slug => {
-  return sounds.filter(sound => {
-    return sound.slug === slug;
-  })[0];
-};
-
-export const getSoundsByType = type => {
-  return sounds.filter(sound => {
-    return sound.type === type;
+export const getAllScenarios = () => {
+  return axios.get(`${baseURL}/scenarios`).then(response => {
+    console.log(response);
   });
 };
 
-export const getAllScenarios = () => {
-  return scenarios;
-};
-
 export const getPresetScenarios = () => {
-  return scenarios.filter(scenario => {
-    return scenario.creator_id === 0;
+  return axios.get(`${baseURL}/scenarios`).then(response => {
+    console.log(response);
   });
 };
 
 export const getScenariosByUserId = id => {
-  return scenarios.filter(scenario => {
-    return scenario.creator_id === id;
+  return axios.get(`${baseURL}/users/${id}/scenarios`).then(response => {
+    console.log(response);
+  });
+};
+
+export const getScenarioBySlug = slug => {
+  return axios.get(`${baseURL}/scenarios/${slug}`).then(response => {
+    console.log(response);
+  });
+};
+
+export const getScenarioById = id => {
+  return axios.get(`${baseURL}/scenarios/${id}`).then(response => {
+    console.log(response);
+  });
+};
+
+export const getAllSounds = type => {
+  return axios.get(`${baseURL}/sounds`).then(response => {
+    console.log(response);
+  });
+};
+
+export const getSoundsByType = type => {
+  return axios.get(`${baseURL}/sounds`).then(response => {
+    console.log(response);
+  });
+};
+
+export const getSoundById = id => {
+  return axios.get(`${baseURL}/sounds/${id}`).then(response => {
+    console.log(response);
+  });
+};
+
+export const getSoundBySlug = slug => {
+  return axios.get(`${baseURL}/sounds/${slug}`).then(response => {
+    console.log(response);
   });
 };
 
 export const getUserByUID = uid => {
-  return users.filter(user => {
-    return user.fb_uid === uid;
-  })[0];
+  return axios.get(`${baseURL}/users/${uid}`).then(response => {
+    console.log(response);
+  });
 };
 
 export const postScenario = scenario => {
-  scenarios.push(scenario);
+  return axios.post(`${baseURL}/scenarios`, scenario).then(response => {
+    console.log(response);
+  });
+};
+
+export const patchScenario = (scenario_id, scenario) => {
+  return axios
+    .patch(`${baseURL}/scenarios/${scenario_id}`, scenario)
+    .then(response => {
+      console.log(response);
+    });
 };
