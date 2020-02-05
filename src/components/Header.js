@@ -1,6 +1,7 @@
 import React from "react";
 import * as styles from "../styles";
 import backarrow from "../assets/gui/backarrow.png";
+import menu from "../assets/gui/menu.png";
 
 const styling = {
   height: "60px",
@@ -26,9 +27,8 @@ const backgroundStyling = {
 
 const h1Styling = {
   textAlign: "center",
-  position: "absolute",
-  color: "#ffffff",
-  zIndex: 2
+  // position: "absolute",
+  color: "#ffffff"
 };
 
 const Header = ({ headerText }) => {
@@ -37,23 +37,46 @@ const Header = ({ headerText }) => {
     window.history.back();
   };
 
+  const goToMenu = () => {
+    console.log("menu");
+  };
+
   return (
     <header style={styling}>
       <div style={backgroundStyling}></div>
-      <center>
-        <h1 style={h1Styling}>{headerText}</h1>
-      </center>
-      <button
-        onClick={goBack}
+      <div
         style={{
-          ...styles.transportButtonStyling,
-          zIndex: 2,
-          borderStyle: "none",
-          padding: "10px"
+          width: "100%",
+          display: "grid",
+          gridTemplateColumns: "70px 1fr 70px"
         }}
       >
-        <img src={backarrow} alt="back" height="32px" width="32px" />
-      </button>
+        <button
+          onClick={goBack}
+          style={{
+            ...styles.transportButtonStyling,
+            zIndex: 2,
+            borderStyle: "none",
+            padding: "10px"
+          }}
+        >
+          <img src={backarrow} alt="back" height="32px" width="32px" />
+        </button>
+        <div style={{ zIndex: 2 }}>
+          <h1 style={h1Styling}>{headerText}</h1>
+        </div>
+        <button
+          onClick={goToMenu}
+          style={{
+            ...styles.transportButtonStyling,
+            zIndex: 2,
+            borderStyle: "none",
+            padding: "10px"
+          }}
+        >
+          <img src={menu} alt="menu" height="32px" width="32px" />
+        </button>
+      </div>
     </header>
   );
 };

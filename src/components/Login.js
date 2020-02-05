@@ -92,7 +92,7 @@ export default class Login extends Component {
           <form style={styling} onSubmit={this.handleSubmit}>
             <h3>Enter credentials</h3>
             <label>
-              Username
+              Email
               <input
                 type="text"
                 style={textBoxStyle}
