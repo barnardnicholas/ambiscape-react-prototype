@@ -63,9 +63,15 @@ class SingleScenario extends Component {
     engine.loadAllHowls(newChannels);
   };
 
+  initlializeChannels = () => {
+    const { channels } = this.state;
+    engine.initializeAllHowls(channels);
+  };
+
   startScenario = () => {
     // const { randomSoundSpawner } = this;
     const { playing, name, channels } = this.state;
+    this.initlializeChannels();
     console.log(`Starting scenario: ${name}`);
     if (!playing) {
       this.setState({ playing: true });
@@ -296,7 +302,6 @@ class SingleScenario extends Component {
       sounds: newSounds
     };
     api.postScenario(newScenario);
-    console.log(scenarios);
   };
 
   render() {

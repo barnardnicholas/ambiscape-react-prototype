@@ -42,6 +42,20 @@ export const loadAllHowls = channels => {
   });
 };
 
+export const initializeAllHowls = channels => {
+  channels.forEach(channel => {
+    const { urls, volume, pan } = channel;
+    urls.forEach(url => {
+      if (typeof volume === "number") {
+        allHowls[url].volume(volume);
+      }
+      if (typeof pan === "number") {
+        allHowls[url].stereo(pan);
+      }
+    });
+  });
+};
+
 export const playHowl = (url, volume, pan) => {
   const thisHowl = allHowls[url];
   if (thisHowl) {
