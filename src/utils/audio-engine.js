@@ -2,6 +2,8 @@ import audioData from "../audio/sounds-index";
 const { Howl, Howler } = require("howler");
 // const spatial = require("howler/src/plugins/howler.spatial.js");
 
+console.dir(Howler);
+
 let allHowls = {};
 let loops = {};
 let shouldPlay = false;
@@ -85,7 +87,12 @@ export const playHowl = (url, volume, pan) => {
 
 export const stopHowl = url => {
   if (allHowls[url]) {
-    allHowls[url].stop();
+    const currentVol = allHowls[url].volume();
+    allHowls[url].fade(currentVol, 0, 3000);
+    setTimeout(() => {
+      allHowls[url].stop();
+      muteAll();
+    }, 3000);
   }
 };
 
@@ -134,6 +141,7 @@ export const playBackgroundHowls = channels => {
       const thisURL = urls[0];
       if (type === "background") {
         playHowl(thisURL, volume, pan);
+        allHowls[thisURL].fade(0, volume, 3000);
       }
     });
   }
@@ -174,11 +182,10 @@ export const loop = (slug, frequency, playNext) => {
   const standardInterval = (1 - frequency) * 16000 + 4000;
   const intervalVariation = (standardInterval / 5) * Math.random();
   const thisInterval = standardInterval + intervalVariation;
-  if (loops[slug]) {
+  if (loops[slug] === true) {
+    console.log(`Interval: ${thisInterval}ms`);
     setTimeout(() => {
       playNext(slug);
-      console.log(`Interval: ${thisInterval}ms`);
-
       loop(slug, frequency, playNext);
     }, thisInterval);
   }

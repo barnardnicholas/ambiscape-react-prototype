@@ -2,6 +2,7 @@ import React from "react";
 import * as styles from "../styles";
 import playbutton from "../assets/gui/playbutton4.png";
 import stopbutton from "../assets/gui/stopbutton4.png";
+import save from "../assets/gui/save.png";
 
 const styling = {
   margin: 0,
@@ -76,7 +77,7 @@ const Transport = ({ startScenario, stopScenario, saveScenario }) => {
           style={styles.transportButtonStyling}
         >
           <center>
-            <img src={stopbutton} alt="save" width="30px" height="30px" />
+            <img src={save} alt="save" width="30px" height="30px" />
           </center>
         </button>
       </div>

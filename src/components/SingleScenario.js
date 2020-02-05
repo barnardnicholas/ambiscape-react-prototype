@@ -96,7 +96,6 @@ class SingleScenario extends Component {
     if (playing) {
       this.setState({ playing: false });
     }
-    engine.muteAll();
     engine.stopRandomHowls();
 
     channels.forEach(channel => {

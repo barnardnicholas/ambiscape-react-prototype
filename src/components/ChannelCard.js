@@ -146,6 +146,7 @@ class ChannelCard extends Component {
             step="0.01"
             value={this.state.volume}
             onChange={this.handleChangeVolume}
+            style={{ margin: "0px 12px 0px 0px" }}
           ></input>
         </>
       );
@@ -268,7 +269,6 @@ class ChannelCard extends Component {
           <div style={styles.tileContentStyling}>
             <label style={styles.channelLabelStyling}>{name}</label>
             <br />
-            {renderChannelVolume()}
             <button
               onClick={this.handleToggleHighlight}
               style={{
@@ -285,6 +285,8 @@ class ChannelCard extends Component {
                 width="16px"
               />
             </button>
+            {renderChannelVolume()}
+
             <button
               onClick={this.handleDelete}
               style={styles.channelButtonStyling}
