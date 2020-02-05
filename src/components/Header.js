@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "@reach/router";
 import * as styles from "../styles";
 import backarrow from "../assets/gui/backarrow.png";
 import menu from "../assets/gui/menu.png";
@@ -65,17 +66,19 @@ const Header = ({ headerText }) => {
         <div style={{ zIndex: 2 }}>
           <h1 style={h1Styling}>{headerText}</h1>
         </div>
-        <button
-          onClick={goToMenu}
-          style={{
-            ...styles.transportButtonStyling,
-            zIndex: 2,
-            borderStyle: "none",
-            padding: "10px"
-          }}
-        >
-          <img src={menu} alt="menu" height="32px" width="32px" />
-        </button>
+        <Link to="/options" style={{ zIndex: 2 }}>
+          <button
+            onClick={goToMenu}
+            style={{
+              ...styles.transportButtonStyling,
+              zIndex: 2,
+              borderStyle: "none",
+              padding: "10px"
+            }}
+          >
+            <img src={menu} alt="menu" height="32px" width="32px" />
+          </button>
+        </Link>
       </div>
     </header>
   );

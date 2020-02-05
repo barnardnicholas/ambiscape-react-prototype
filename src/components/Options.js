@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { Link } from "@reach/router";
+import * as styles from "../styles";
+import Header from "./Header";
 
 class Options extends Component {
   render() {
@@ -10,10 +13,11 @@ class Options extends Component {
 
     const listStyle = {
       position: "50% 50%",
-      margin: "8px 16px",
+      margin: "100px 16px 16px 16px",
       padding: "0px",
       width: "80%",
-      maxWidth: "300px"
+      maxWidth: "300px",
+      listStyle: "none"
     };
 
     const backgroundStyling = {
@@ -32,12 +36,43 @@ class Options extends Component {
     };
 
     return (
-      <div style={listStyle}>
-        <div style={backgroundStyling}></div>
-        <div style={styling}>
-          <h3>Options</h3>
-        </div>
-      </div>
+      <center>
+        <Header headerText="Options" />
+        <ul style={listStyle}>
+          <li>
+            <Link to="/settings" className="reactlink">
+              <div style={backgroundStyling}></div>
+              <div style={styling}>
+                <h3>Settings</h3>
+              </div>
+            </Link>
+          </li>
+          <li>
+            <Link to="/" className="reactlink">
+              <div style={backgroundStyling}></div>
+              <div style={styling}>
+                <h3>Log Out</h3>
+              </div>
+            </Link>
+          </li>
+          <li>
+            <Link to="/help" className="reactlink">
+              <div style={backgroundStyling}></div>
+              <div style={styling}>
+                <h3>Help</h3>
+              </div>
+            </Link>
+          </li>
+          <li>
+            <Link to="/about" className="reactlink">
+              <div style={backgroundStyling}></div>
+              <div style={styling}>
+                <h3>About</h3>
+              </div>
+            </Link>
+          </li>
+        </ul>
+      </center>
     );
   }
 }

@@ -9,6 +9,8 @@ import users from "./data/users";
 import ErrorPage from "./components/ErrorPage";
 import * as firebase from "./utils/user-auth";
 import ErrorPopup from "./components/ErrorPopup";
+import Options from "./components/Options";
+import About from "./components/About";
 
 class App extends Component {
   state = {
@@ -136,6 +138,8 @@ class App extends Component {
               switchUser={this.switchUser}
               createUser={this.createUser}
             />
+            <Options path="/options" />
+            <About path="/about" />
             <ErrorPage path="/error" />
             <ErrorPage default />
           </Router>
