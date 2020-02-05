@@ -3,20 +3,20 @@ import * as app from "../App";
 import "firebase/auth/";
 //------------------------
 // DEVELOPMENT ONLY - LOCALLY-STORED API KEY FOR FIREBASE
-// import firebaseLocalConfig from "../auth_ignore/firebase-config";
-// firebase.initializeApp(firebaseLocalConfig);
+import firebaseLocalConfig from "../auth_ignore/firebase-config";
+firebase.initializeApp(firebaseLocalConfig);
 //------------------------
 // PRODUCTION ONLY - NETLIFY ENV VARIABLES
-const envConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
-  databaseURL: process.env.REACT_APP_FIREBASE_DATABASEURL,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
-  messagingSenderId: process.env.REACT_APP_CLIENTID,
-  appId: process.env.REACT_APP_APPID
-};
-firebase.initializeApp(envConfig);
+// const envConfig = {
+//   apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
+//   authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
+//   databaseURL: process.env.REACT_APP_FIREBASE_DATABASEURL,
+//   projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
+//   storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
+//   messagingSenderId: process.env.REACT_APP_CLIENTID,
+//   appId: process.env.REACT_APP_APPID
+// };
+// firebase.initializeApp(envConfig);
 //------------------------
 
 export const updateAuthState = () => {
