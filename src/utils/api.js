@@ -13,7 +13,7 @@ export const getAllScenarios = () => {
 };
 
 export const getPresetScenarios = () => {
-  // will have creator_id of 1
+  // will have creator_id of RqEbKG6twhWc6ItO7Z2XJ5XJjw42
   return axios.get(`${baseURL}/scenarios`).then(response => {
     const { scenarios } = response.data;
     const parsedScenarios = scenarios.map(scenario => {
@@ -21,13 +21,13 @@ export const getPresetScenarios = () => {
       return { ...keys, sounds: JSON.parse(sounds) };
     });
     return parsedScenarios.filter(scenario => {
-      return scenario.creator_id === 1;
+      return scenario.creator_id === "RqEbKG6twhWc6ItO7Z2XJ5XJjw42";
     });
   });
 };
 
-export const getScenariosByUserId = id => {
-  return axios.get(`${baseURL}/users/${id}/scenarios`).then(response => {
+export const getScenariosByUserId = uid => {
+  return axios.get(`${baseURL}/users/${uid}/scenarios`).then(response => {
     console.log(response);
   });
 };
@@ -70,7 +70,7 @@ export const getSoundBySlug = slug => {
 
 export const getUserByUID = uid => {
   return axios.get(`${baseURL}/users/${uid}`).then(response => {
-    console.log(response);
+    return response.data.user;
   });
 };
 

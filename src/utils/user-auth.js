@@ -30,7 +30,17 @@ export const signIn = (email, password) => {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(response => {
-      return response;
+      const { email, uid } = response.user;
+      return response.user;
+    });
+};
+
+export const signOut = () => {
+  return firebase
+    .auth()
+    .signOut()
+    .then(response => {
+      console.log(response);
     });
 };
 
