@@ -91,7 +91,6 @@ export const stopHowl = url => {
     allHowls[url].fade(currentVol, 0, 3000);
     setTimeout(() => {
       allHowls[url].stop();
-      muteAll();
     }, 3000);
   }
 };

@@ -35,5 +35,10 @@ export const signIn = (email, password) => {
 };
 
 export const createUser = (email, password) => {
-  firebase.auth().createUserWithEmailAndPassword(email, password);
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then(response => {
+      console.log(response);
+    });
 };

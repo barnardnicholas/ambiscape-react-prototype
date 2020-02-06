@@ -18,6 +18,7 @@ import rumblingfire from "./rumbling-fire.ogg";
 import smallstream from "./small-stream.ogg";
 import snowstorm from "./snowstorm.ogg";
 import summerambience from "./summer-ambience.ogg";
+import hypnotoad from "./hypnotoad.ogg";
 
 const backgroundData = {
   campfire: {
@@ -79,6 +80,9 @@ const backgroundData = {
   },
   summerambience: {
     summerambience: summerambience
+  },
+  hypnotoad: {
+    hypnotoad: hypnotoad
   }
 };
 

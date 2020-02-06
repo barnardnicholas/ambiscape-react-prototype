@@ -267,6 +267,8 @@ class SingleScenario extends Component {
       return channel.slug === slug;
     })[0];
     channelToDelete.urls.forEach(url => {
+      console.log(url);
+      console.log("delete", url);
       engine.stopHowl(url);
       if (channelToDelete.type === "random") {
         engine.stopOneRandomChannel(channelToDelete);

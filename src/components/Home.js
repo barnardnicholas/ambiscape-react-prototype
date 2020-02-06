@@ -115,7 +115,7 @@ const Home = ({ currentUser }) => {
             </div>
           </Link>
         </li>
-
+        {renderSavedScenarios()}
         {renderLoginButton()}
         <li>
           <Link to="/options" className="reactlink">
@@ -125,7 +125,6 @@ const Home = ({ currentUser }) => {
             </div>
           </Link>
         </li>
-        {renderSavedScenarios()}
       </ul>
       {renderFooter()}
     </center>
