@@ -57,16 +57,15 @@ class App extends Component {
     } else {
       firebase
         .signIn(email, password)
-        .then(response => {
+        .then(fbUser => {
+          const { email, uid } = fbUser;
           const filteredUser = users.filter(user => {
-            return user.fb_uid === response.user.uid;
+            return user.email === email;
           })[0];
           const {
             username,
             name,
             user_id,
-            fb_uid,
-            email,
             avatar_url,
             saved_scenarios
           } = filteredUser;
@@ -75,12 +74,13 @@ class App extends Component {
               username: username,
               user_id: user_id,
               email: email,
-              fb_uid: fb_uid,
+              fb_uid: uid,
               name: name,
               avatar_url: avatar_url,
               saved_scenarios: saved_scenarios
             }
           });
+          navigate("/");
           //   const { uid } = response;
           //   api.getUserByUID(uid).then(user => {
           //     console.log(user);
@@ -106,6 +106,7 @@ class App extends Component {
           //   });
         })
         .catch(err => {
+          console.log(err);
           const { code, message } = err;
           this.throwError(code, message);
         });

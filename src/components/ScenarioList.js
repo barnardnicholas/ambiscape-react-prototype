@@ -45,12 +45,12 @@ class ScenarioList extends Component {
   };
 
   loadSavedScenarios = () => {
-    // const { fb_uid } = this.props.currentUser;
-    // const savedScenarios = api.getScenariosByUserId(user_id);
-    // this.setState({
-    //   scenarios: savedScenarios,
-    //   headerText: "My Saved Scenarios"
-    // });
+    const { fb_uid } = this.props.currentUser;
+    const savedScenarios = api.getScenariosByUserId(fb_uid);
+    this.setState({
+      scenarios: savedScenarios,
+      headerText: "My Saved Scenarios"
+    });
     // api.getAllScenarios(fb_uid).then(scenarios => {
     //   console.log(scenarios);
     // });

@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import Transport from "./Transport";
 import ChannelList from "./ChannelList";
 import * as utils from "../utils/utils";
-import * as api from "../utils/api";
-// import * as api from "../utils/dummy-api";
+// import * as api from "../utils/api";
+import * as api from "../utils/dummy-api";
 import * as engine from "../utils/audio-engine";
 import scenarios from "../data/scenarios";
 import sounds from "../data/sounds";
@@ -81,10 +81,10 @@ class SingleScenario extends Component {
       const randomChannels = channels.filter(channel => {
         return channel.type === "random";
       });
+      engine.startRandomHowls();
       randomChannels.forEach(channel => {
         const { slug } = channel;
         const { frequency } = channel;
-        // engine.startRandomHowls();
         engine.startOneRandomChannel(slug, frequency, this.playNextRandomSound);
       });
     }
@@ -173,7 +173,6 @@ class SingleScenario extends Component {
   };
 
   changeVolume = (slug, value) => {
-    console.log("change volume");
     const { channels } = this.state;
     const thisChannel = channels.filter(channel => {
       return channel.slug === slug;
@@ -192,7 +191,6 @@ class SingleScenario extends Component {
   };
 
   changePan = (slug, value) => {
-    console.log("change pan");
     const { channels } = this.state;
     const thisChannel = channels.filter(channel => {
       return channel.slug === slug;
@@ -211,7 +209,6 @@ class SingleScenario extends Component {
   };
 
   changeFrequency = (slug, value) => {
-    console.log("change frequency");
     const { channels } = this.state;
     const thisChannel = channels.filter(channel => {
       return channel.slug === slug;
