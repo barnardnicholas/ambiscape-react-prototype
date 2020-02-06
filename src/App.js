@@ -58,51 +58,52 @@ class App extends Component {
       firebase
         .signIn(email, password)
         .then(response => {
-          // const filteredUser = users.filter(user => {
-          //   return user.fb_uid === response.user.uid;
-          // })[0];
-          // const {
-          //   username,
-          //   name,
-          //   user_id,
-          //   fb_uid,
-          //   email,
-          //   avatar_url,
-          //   saved_scenarios
-          // } = filteredUser;
-          // this.setState({
-          //   currentUser: {
-          //     username: username,
-          //     user_id: user_id,
-          //     email: email,
-          //     fb_uid: fb_uid,
-          //     name: name,
-          //     avatar_url: avatar_url,
-          //     saved_scenarios: saved_scenarios
-          //   }
-          // });
-          const { uid } = response;
-          api.getUserByUID(uid).then(user => {
-            const {
-              username,
-              name,
-              fb_uid,
-              email,
-              avatar_url,
-              saved_scenarios
-            } = user;
-            this.setState({
-              currentUser: {
-                username: username,
-                email: email,
-                fb_uid: fb_uid,
-                name: name,
-                avatar_url: avatar_url,
-                saved_scenarios: saved_scenarios
-              }
-            });
-            navigate("/");
+          const filteredUser = users.filter(user => {
+            return user.fb_uid === response.user.uid;
+          })[0];
+          const {
+            username,
+            name,
+            user_id,
+            fb_uid,
+            email,
+            avatar_url,
+            saved_scenarios
+          } = filteredUser;
+          this.setState({
+            currentUser: {
+              username: username,
+              user_id: user_id,
+              email: email,
+              fb_uid: fb_uid,
+              name: name,
+              avatar_url: avatar_url,
+              saved_scenarios: saved_scenarios
+            }
           });
+          //   const { uid } = response;
+          //   api.getUserByUID(uid).then(user => {
+          //     console.log(user);
+          //     const {
+          //       username,
+          //       name,
+          //       fb_uid,
+          //       email,
+          //       avatar_url,
+          //       saved_scenarios
+          //     } = user;
+          //     this.setState({
+          //       currentUser: {
+          //         username: username,
+          //         email: email,
+          //         fb_uid: fb_uid,
+          //         name: name,
+          //         avatar_url: avatar_url,
+          //         saved_scenarios: saved_scenarios
+          //       }
+          //     });
+          //     navigate("/");
+          //   });
         })
         .catch(err => {
           const { code, message } = err;

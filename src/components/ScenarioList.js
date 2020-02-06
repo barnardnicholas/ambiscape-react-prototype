@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import ScenarioCard from "./ScenarioCard";
 import Header from "./Header";
-import * as api from "../utils/api";
-// import * as api from "../utils/dummy-api";
+// import * as api from "../utils/api";
+import * as api from "../utils/dummy-api";
 import * as engine from "../utils/audio-engine";
 import ScenarioListFooter from "./ScenarioListFooter";
 
@@ -28,27 +28,32 @@ class ScenarioList extends Component {
   }
 
   loadPresetScenarios = () => {
-    // const presetScenarios = api.getPresetScenarios();
-    // this.setState({
-    //   scenarios: presetScenarios,
-    //   headerText: "Preset Scenarios"
-    // });
-    api.getPresetScenarios().then(scenarios => {
-      console.log(scenarios);
-      this.setState({
-        scenarios: scenarios,
-        headerText: "Preset Scenarios"
-      });
+    const presetScenarios = api.getPresetScenarios();
+    this.setState({
+      scenarios: presetScenarios,
+      headerText: "Preset Scenarios"
     });
+    // api.getAllScenarios().then(scenarios => {
+    //   const filteredScenarios = scenarios.filter(scenario => {
+    //     return scenario.creator_id === "RqEbKG6twhWc6ItO7Z2XJ5XJjw42";
+    //   });
+    //   this.setState({
+    //     scenarios: filteredScenarios,
+    //     headerText: "Preset Scenarios"
+    //   });
+    // });
   };
 
   loadSavedScenarios = () => {
-    const { user_id } = this.props.currentUser;
-    const savedScenarios = api.getScenariosByUserId(user_id);
-    this.setState({
-      scenarios: savedScenarios,
-      headerText: "My Saved Scenarios"
-    });
+    // const { fb_uid } = this.props.currentUser;
+    // const savedScenarios = api.getScenariosByUserId(user_id);
+    // this.setState({
+    //   scenarios: savedScenarios,
+    //   headerText: "My Saved Scenarios"
+    // });
+    // api.getAllScenarios(fb_uid).then(scenarios => {
+    //   console.log(scenarios);
+    // });
   };
 
   renderFooter = () => {

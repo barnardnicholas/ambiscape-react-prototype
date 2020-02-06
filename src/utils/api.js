@@ -6,22 +6,19 @@ import axios from "axios";
 
 const baseURL = "https://ambiscape.herokuapp.com/api";
 
-export const getAllScenarios = () => {
-  return axios.get(`${baseURL}/scenarios`).then(response => {
-    console.log(response);
-  });
-};
+// export const getAllScenarios = () => {
+//   return axios.get(`${baseURL}/scenarios`).then(response => {
+//     console.log(response);
+//   });
+// };
 
-export const getPresetScenarios = () => {
+export const getAllScenarios = () => {
   // will have creator_id of RqEbKG6twhWc6ItO7Z2XJ5XJjw42
   return axios.get(`${baseURL}/scenarios`).then(response => {
     const { scenarios } = response.data;
-    const parsedScenarios = scenarios.map(scenario => {
+    return scenarios.map(scenario => {
       const { sounds, ...keys } = scenario;
       return { ...keys, sounds: JSON.parse(sounds) };
-    });
-    return parsedScenarios.filter(scenario => {
-      return scenario.creator_id === "RqEbKG6twhWc6ItO7Z2XJ5XJjw42";
     });
   });
 };
