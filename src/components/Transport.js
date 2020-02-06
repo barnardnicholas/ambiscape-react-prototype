@@ -36,7 +36,7 @@ const backgroundStyling = {
   padding: "0px"
 };
 
-const Transport = ({ startScenario, stopScenario, saveScenario }) => {
+const Transport = ({ playing, startScenario, stopScenario, saveScenario }) => {
   const handleStart = () => {
     startScenario();
   };
@@ -56,10 +56,19 @@ const Transport = ({ startScenario, stopScenario, saveScenario }) => {
         <button
           onClick={handleStart}
           className="transportbutton"
-          style={styles.transportButtonStyling}
+          style={{
+            ...styles.transportButtonStyling,
+            backgroundColor: playing ? "#ffffff" : "inherit"
+          }}
         >
           <center>
-            <img src={playbutton} alt="play" width="30px" height="30px" />
+            <img
+              src={playbutton}
+              alt="play"
+              width="30px"
+              height="30px"
+              style={playing ? { filter: "invert()" } : {}}
+            />
           </center>
         </button>
         <button

@@ -112,14 +112,16 @@ class ChannelCard extends Component {
 
   handleToggleMute = () => {
     const { toggleMuteChannel } = this.props;
-    const { slug, urls } = this.state;
+    const { slug, urls, mute } = this.state;
     console.log(`toggle mute for ${slug}`);
+    this.setState({ mute: !mute });
     toggleMuteChannel(urls);
   };
 
   handleToggleSolo = () => {
     const { slug } = this.state;
     const { toggleSoloChannel } = this.props;
+    console.log(`toggle solo for ${slug}`);
     toggleSoloChannel(slug);
   };
 
@@ -130,8 +132,8 @@ class ChannelCard extends Component {
   };
 
   render() {
-    const { name, id, type } = this.state;
-    const { isHighlighted } = this.props;
+    const { name, id, type, mute } = this.state;
+    const { isHighlighted, soloChannel } = this.props;
 
     const renderChannelVolume = () => {
       return (
@@ -160,7 +162,9 @@ class ChannelCard extends Component {
             style={{
               ...styles.channelButtonStyling,
               margin: "0px 8px",
-              borderStyle: "solid"
+              borderStyle: "solid",
+              backgroundColor: mute ? "#ffffff" : "transparent",
+              color: mute ? "#000000" : "#ffffff"
             }}
           >
             {/* <img src={mute} alt="Mute" height="16px" width="16px" /> */}M
@@ -170,7 +174,9 @@ class ChannelCard extends Component {
             style={{
               ...styles.channelButtonStyling,
               margin: "0px 8px",
-              borderStyle: "solid"
+              borderStyle: "solid",
+              backgroundColor: soloChannel ? "#ffffff" : "transparent",
+              color: soloChannel ? "#000000" : "#ffffff"
             }}
           >
             {/* <img src={solo} alt="Solo" height="16px" width="16px" /> */}S

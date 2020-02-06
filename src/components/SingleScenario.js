@@ -340,6 +340,7 @@ class SingleScenario extends Component {
             deleteChannel={this.deleteChannel}
           />
           <Transport
+            playing={playing}
             startScenario={this.startScenario}
             stopScenario={this.stopScenario}
             saveScenario={this.saveScenario}
