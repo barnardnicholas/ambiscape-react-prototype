@@ -151,6 +151,14 @@ export const playBackgroundHowls = channels => {
   }
 };
 
+export const playOneBackgroundHowl = (url, volume, pan) => {
+  playHowl(url, volume, pan);
+  allHowls[url].fade(0, volume, 3000);
+  setTimeout(() => {
+    allHowls[url].volume(volume);
+  }, 3000);
+};
+
 export const startRandomHowls = () => {
   console.log("startRandomHowls");
   shouldPlay = true;
