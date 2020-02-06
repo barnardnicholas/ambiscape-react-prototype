@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import ScenarioCard from "./ScenarioCard";
 import Header from "./Header";
-// import * as api from "../utils/api";
-import * as api from "../utils/dummy-api";
+import * as api from "../utils/api";
+// import * as api from "../utils/dummy-api";
 import * as engine from "../utils/audio-engine";
 import ScenarioListFooter from "./ScenarioListFooter";
 
@@ -28,10 +28,17 @@ class ScenarioList extends Component {
   }
 
   loadPresetScenarios = () => {
-    const presetScenarios = api.getPresetScenarios();
-    this.setState({
-      scenarios: presetScenarios,
-      headerText: "Preset Scenarios"
+    // const presetScenarios = api.getPresetScenarios();
+    // this.setState({
+    //   scenarios: presetScenarios,
+    //   headerText: "Preset Scenarios"
+    // });
+    api.getPresetScenarios().then(scenarios => {
+      console.log(scenarios);
+      this.setState({
+        scenarios: scenarios,
+        headerText: "Preset Scenarios"
+      });
     });
   };
 

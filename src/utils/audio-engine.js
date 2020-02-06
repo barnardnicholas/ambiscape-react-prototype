@@ -90,7 +90,9 @@ export const stopHowl = url => {
     const currentVol = allHowls[url].volume();
     allHowls[url].fade(currentVol, 0, 3000);
     setTimeout(() => {
-      allHowls[url].stop();
+      if (allHowls[url]) {
+        allHowls[url].stop();
+      }
     }, 3000);
   }
 };
@@ -141,6 +143,9 @@ export const playBackgroundHowls = channels => {
       if (type === "background") {
         playHowl(thisURL, volume, pan);
         allHowls[thisURL].fade(0, volume, 3000);
+        setTimeout(() => {
+          allHowls[thisURL].volume(volume);
+        }, 3000);
       }
     });
   }
@@ -162,11 +167,11 @@ export const startOneRandomChannel = (slug, frequency, playNext) => {
 };
 
 export const stopOneRandomChannel = channel => {
-  const { slug, urls } = channel;
+  const { slug, urls, volume } = channel;
+  urls.forEach(url => {
+    stopHowl(url);
+  });
   loops[slug] = false;
-  // urls.forEach(url => {
-  //   allHowls[url] = null;
-  // });
 };
 
 export const clearAllHowls = () => {
@@ -182,10 +187,12 @@ export const loop = (slug, frequency, playNext) => {
   const intervalVariation = (standardInterval / 5) * Math.random();
   const thisInterval = standardInterval + intervalVariation;
   if (loops[slug] === true) {
-    console.log(`Interval: ${thisInterval}ms`);
     setTimeout(() => {
-      playNext(slug);
-      loop(slug, frequency, playNext);
+      if (loops[slug === true]) {
+        console.log(`Interval: ${thisInterval}ms`);
+        playNext(slug);
+        loop(slug, frequency, playNext);
+      }
     }, thisInterval);
   }
 };

@@ -4,7 +4,7 @@ import users from "../data/users";
 import * as utils from "../utils/utils";
 import axios from "axios";
 
-const baseURL = "";
+const baseURL = "https://ambiscape.herokuapp.com/api";
 
 export const getAllScenarios = () => {
   return axios.get(`${baseURL}/scenarios`).then(response => {
@@ -13,8 +13,16 @@ export const getAllScenarios = () => {
 };
 
 export const getPresetScenarios = () => {
+  // will have creator_id of 1
   return axios.get(`${baseURL}/scenarios`).then(response => {
-    console.log(response);
+    const { scenarios } = response.data;
+    const parsedScenarios = scenarios.map(scenario => {
+      const { sounds, ...keys } = scenario;
+      return { ...keys, sounds: JSON.parse(sounds) };
+    });
+    return parsedScenarios.filter(scenario => {
+      return scenario.creator_id === 1;
+    });
   });
 };
 

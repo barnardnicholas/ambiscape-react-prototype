@@ -229,7 +229,7 @@ class SingleScenario extends Component {
   };
 
   addChannel = sound => {
-    console.log(sound);
+    const { isPlaying } = this.state;
     const newChannel = {
       ...sound,
       volume: 0.5,
@@ -248,14 +248,20 @@ class SingleScenario extends Component {
       };
     });
     engine.loadHowlsForOneChannel(newChannel);
-    setTimeout(() => {
-      const { type, urls, slug, frequency } = newChannel;
-      if (type === "background") {
-        engine.playHowl(urls[0], 0.5, 0);
-      } else {
-        engine.startOneRandomChannel(slug, frequency, this.playNextRandomSound);
-      }
-    });
+    if (isPlaying) {
+      setTimeout(() => {
+        const { type, urls, slug, frequency } = newChannel;
+        if (type === "background") {
+          engine.playHowl(urls[0], 0.5, 0);
+        } else {
+          engine.startOneRandomChannel(
+            slug,
+            frequency,
+            this.playNextRandomSound
+          );
+        }
+      }, 1000);
+    }
   };
 
   deleteChannel = slug => {
