@@ -66,7 +66,7 @@ const Header = ({ headerText }) => {
         <div style={{ zIndex: 2 }}>
           <h1 style={h1Styling}>{headerText}</h1>
         </div>
-        <Link to="/options" style={{ zIndex: 2 }}>
+        <Link to="/about" style={{ zIndex: 2 }}>
           <button
             onClick={goToMenu}
             style={{
