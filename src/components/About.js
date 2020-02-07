@@ -93,7 +93,10 @@ const About = () => {
                 https://www.linkedin.com/in/barnardnicholas/
               </a>
               <br />
-              Sam The Mansplainer- (He’ll tell you later)
+              Sam Blundell-
+              <a href="https://www.linkedin.com/in/sam-blundell-0831a81a2/">
+                https://www.linkedin.com/in/sam-blundell-0831a81a2/
+              </a>
               <br />
               <br />
               If you wish to view the repo;

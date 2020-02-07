@@ -14,8 +14,8 @@ const createHowl = (channel, url) => {
   const howlData = {
     src: [filePath],
     stereo: stereo,
-    loop: loop
-    // html5: false
+    loop: loop,
+    html5: true
   };
   // if (type === "background") {
   //   howlData.html5 = true;
