@@ -21,7 +21,7 @@ const About = () => {
   const backgroundStyling = {
     position: "absolute",
     width: "76%",
-    height: "400px",
+    height: "420px",
     margin: "0px",
     padding: "0px",
     borderRadius: "6px",
@@ -56,7 +56,9 @@ const About = () => {
               <br />
               Please note that, due to time constraints during development, this
               app has been optimised for Google Chrome web browser, and may be
-              buggy on other browsers.
+              buggy on other browsers. We also found audio bugs on some mobile
+              devices. We will continue to iron out bugs but we appreciate your
+              patience!
               <br />
               If you wish to contact us for any reason you can find us on
               LinkedIn:
@@ -94,7 +96,10 @@ const About = () => {
               </a>
               <br />
               Sam Blundell-
-              <a href="https://www.linkedin.com/in/sam-blundell-0831a81a2/">
+              <a
+                style={linkStyling}
+                href="https://www.linkedin.com/in/sam-blundell-0831a81a2/"
+              >
                 https://www.linkedin.com/in/sam-blundell-0831a81a2/
               </a>
               <br />
