@@ -118,10 +118,10 @@ const Home = ({ currentUser }) => {
         {renderSavedScenarios()}
         {renderLoginButton()}
         <li>
-          <Link to="/options" className="reactlink">
+          <Link to="/about" className="reactlink">
             <div style={backgroundStyling}></div>
             <div style={styling}>
-              <h3>Options</h3>
+              <h3>About</h3>
             </div>
           </Link>
         </li>

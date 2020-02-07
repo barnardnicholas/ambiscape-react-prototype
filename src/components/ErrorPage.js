@@ -13,7 +13,7 @@ export default function ErrorPage() {
     position: "absolute",
     maxWidth: "300px",
     width: "80%",
-    height: "56px"
+    height: "120px"
   };
 
   return (
@@ -27,6 +27,7 @@ export default function ErrorPage() {
         ></div>
         <div style={styles.tileContentStyling}>
           <h3>Oops! Nothing to see here...</h3>
+          <h3>We're still under construction, please bear with us!</h3>
         </div>{" "}
       </ul>
     </div>

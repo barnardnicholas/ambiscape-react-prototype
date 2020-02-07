@@ -21,7 +21,7 @@ const About = () => {
   const backgroundStyling = {
     position: "absolute",
     width: "76%",
-    height: "340px",
+    height: "400px",
     margin: "0px",
     padding: "0px",
     borderRadius: "6px",
@@ -53,6 +53,10 @@ const About = () => {
               the web version and application respectively. We hope you enjoy
               it.
               <br />
+              <br />
+              Please note that, due to time constraints during development, this
+              app has been optimised for Google Chrome web browser, and may be
+              buggy on other browsers.
               <br />
               If you wish to contact us for any reason you can find us on
               LinkedIn:

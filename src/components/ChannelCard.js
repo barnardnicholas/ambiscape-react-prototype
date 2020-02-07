@@ -132,7 +132,7 @@ class ChannelCard extends Component {
   };
 
   render() {
-    const { name, id, type, mute } = this.state;
+    const { name, id, type, mute, slug } = this.state;
     const { isHighlighted, soloChannel } = this.props;
 
     const renderChannelVolume = () => {
@@ -229,7 +229,7 @@ class ChannelCard extends Component {
           <div
             style={{ ...styles.tileBackgroundStyling, ...tileSizeStyling }}
           ></div>
-          <div style={styles.tileContentStyling}>
+          <div style={{ ...styles.tileContentStyling, height: "120px" }}>
             <label style={styles.channelLabelStyling}>{name}</label>
             <br />
             {renderChannelButtons()}
